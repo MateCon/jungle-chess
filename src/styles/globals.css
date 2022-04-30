@@ -2,10 +2,29 @@
 
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @layer base {
-    body {
-        font-family: "Poppins", sans-serif;
-    }
+	body {
+		font-family: "Poppins", sans-serif;
+	}
 }
+
+@layer components {
+	/* sidebar */
+	.sidebar {
+		@apply fixed top-0 w-20 h-screen bg-background-800 flex flex-col items-center pt-5 gap-3;
+	}
+
+	.sidebar-icon {
+		@apply relative py-4 select-none hover:cursor-pointer;
+	}
+
+	/* sidebar-tooltip (starts with scale-0) */
+	.sidebar-tooltip {
+		@apply absolute w-auto p-2 min-w-max left-24 top-0 
+            rounded-md shadow-md text-white bg-neutral-700 
+            text-sm font-bold transition-all duration-100 scale-0 origin-left;
+	}
+}
+
+@tailwind utilities;
