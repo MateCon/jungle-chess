@@ -1,6 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { FC, ReactNode } from "react"
+import { CgProfile } from "react-icons/cg"
+import { FaChessPawn } from "react-icons/fa"
 
 interface IconProps {
     children: ReactNode;
@@ -10,12 +12,11 @@ interface IconProps {
 
 const Icon: FC<IconProps> = ({ children, name, href }) => {
     return (
-        <div className="sidebar-icon group">
-            <Link href={href} passHref>
+        <div className="navbar-icon group">
+            <Link href={href} passHref><a>
                 {children}
-            </Link>
-
-            <span className="sidebar-tooltip group-hover:scale-100">
+            </a></Link>
+            <span className="navbar-tooltip group-hover:scale-100">
                 {name}
             </span>
         </div>
@@ -24,20 +25,25 @@ const Icon: FC<IconProps> = ({ children, name, href }) => {
 
 const Navbar: FC = () => {
     return (
-        <div className="sidebar">
+        <div className="navbar">
             <Link href="/" passHref>
                 <p className="font-semibold text-2xl cursor-pointer">
                     <span className="text-primary-600">J</span>
                     <span className="text-white">C</span>
                 </p>
             </Link>
-            <div className="flex flex-col w-full py-2 hover:bg-background-900">
-                <Icon name="Play" href="/">
-                    <Image
-                        src="/images/golden-rat.svg"
-                        alt="Golden rat"
-                        layout="fill"
-                    />
+            <div className="navbar-icon-container">
+                {/* replace href for /profile/${username} */}
+                <Icon name="Profile" href="/profile">
+                    {/* replace by profile picture */}
+                    <div className="text-4xl">
+                        <CgProfile />
+                    </div>
+                </Icon>
+                <Icon name="Play" href="/play">
+                    <div className="text-4xl">
+                        <FaChessPawn className="text-[#ecec45]" />
+                    </div>
                 </Icon>
             </div>
         </div>

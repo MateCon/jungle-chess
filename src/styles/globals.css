@@ -10,19 +10,27 @@
 }
 
 @layer components {
-	/* sidebar */
-	.sidebar {
-		@apply fixed top-0 w-20 h-screen bg-background-800 flex flex-col items-center pt-5 gap-3;
+	/* navbar */
+	.navbar {
+		@apply fixed flex gap-3 bg-background-800 shadow-md
+			top-0 w-screen h-20 flex-row px-5 md:px-0 place-items-center
+			md:w-20 md:h-screen md:flex-col md:items-center md:pt-5;
 	}
 
-	.sidebar-icon {
-		@apply relative py-4 select-none hover:cursor-pointer;
+	.navbar-icon-container {
+		@apply flex flex-row md:flex-col h-full md:w-full justify-center md:justify-start md:py-2;
 	}
 
-	/* sidebar-tooltip (starts with scale-0) */
-	.sidebar-tooltip {
-		@apply absolute w-auto p-2 min-w-max left-24 top-0 
-            rounded-md shadow-md text-white bg-neutral-700 
+	.navbar-icon {
+		@apply relative py-4 w-20 md:w-full h-full 
+			md:h-20 select-none hover:cursor-pointer 
+			hover:bg-background-900 grid place-content-center;
+	}
+
+	/* navbar-tooltip (starts with scale-0) */
+	.navbar-tooltip {
+		@apply absolute w-auto p-2 min-w-max left-1/2 -translate-x-1/2 
+			top-24 md:left-32 md:top-5 rounded-md shadow-md text-white bg-neutral-700 
             text-sm font-bold transition-all duration-100 scale-0 origin-left;
 	}
 }
