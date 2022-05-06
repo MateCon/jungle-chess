@@ -1,12 +1,23 @@
 import { FC } from "react";
-import { Piece } from "../types/game";
 
 interface Props {
-    piece: string
+    piece: string,
+    x: number,
+    y: number,
 }
 
-const GamePiece: FC<Props> = ({ piece }) => {
-    return <p className='text-white'>{piece}</p>
+const SQUARE_SIZE = 48;
+
+const GamePiece: FC<Props> = ({ piece, x, y }) => {
+    let color = piece[0] === 'R' ? 'text-[red]' : 'text-[blue]';
+
+    return <p
+        className={`${color} absolute w-12 text-center text-xl font-black`}
+        style={{
+            top: y * SQUARE_SIZE + 10,
+            left: x * SQUARE_SIZE
+        }}
+    >{piece[1]}</p>
 }
 
 export default GamePiece;
