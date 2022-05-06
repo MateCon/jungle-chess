@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Image from "next/image";
 
 interface Props {
     piece: string,
@@ -9,15 +10,20 @@ interface Props {
 const SQUARE_SIZE = 48;
 
 const GamePiece: FC<Props> = ({ piece, x, y }) => {
-    let color = piece[0] === 'R' ? 'text-[red]' : 'text-[blue]';
-
-    return <p
-        className={`${color} absolute w-12 text-center text-xl font-black`}
+    return <div
+        className={`absolute w-12 h-12 rounded-full overflow-hidden`}
         style={{
-            top: y * SQUARE_SIZE + 10,
-            left: x * SQUARE_SIZE
+            top: y * SQUARE_SIZE,
+            left: x * SQUARE_SIZE,
         }}
-    >{piece[1]}</p>
+    >
+        <Image
+            src={`/static/assets/pieces/${piece}.png`}
+            alt="piece"
+            layout="fill"
+            objectFit="cover"
+        />
+    </div>
 }
 
 export default GamePiece;
