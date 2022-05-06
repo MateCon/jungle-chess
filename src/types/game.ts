@@ -23,14 +23,3 @@ export enum MoveDirection {
     Left = "L",
     Right = "R",
 }
-
-export enum PieceValue {
-    R = 1, 
-    C = 2, 
-    D = 3,
-    W = 4, 
-    H = 5,
-    T = 6,
-    L = 7,
-    E = 8,
-}
