@@ -56,15 +56,6 @@ const boardState: string[][] = [
 		Piece.Empty,
 	],
 	[
-		Piece.Empty,
-		Piece.Empty,
-		Piece.Empty,
-		Piece.Empty,
-		Piece.Empty,
-		Piece.Empty,
-		Piece.Empty,
-	],
-	[
 		`B${Piece.Elephant}`,
 		Piece.Empty,
 		`B${Piece.Wolf}`,
