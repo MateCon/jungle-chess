@@ -1,3 +1,5 @@
+export type Turn = "B" | "R";
+
 export enum GameObject {
 	Land = "L",
 	Water = "W",
@@ -15,6 +17,12 @@ export enum Piece {
 	Lion = "L",
 	Elephant = "E",
 	Empty = "-",
+}
+
+export interface PieceData {
+	name: Piece;
+	position: [number, number];
+	team: Turn;
 }
 
 export enum MoveDirection {

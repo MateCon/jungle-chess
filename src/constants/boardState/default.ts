@@ -1,4 +1,4 @@
-import { Piece } from "../../types/game";
+import { Piece, PieceData } from "../../types/game";
 
 const boardState: string[][] = [
 	[
@@ -84,27 +84,23 @@ const boardState: string[][] = [
 	],
 ];
 
-export const startingPieces: {
-	color: string;
-	piece: Piece;
-	position: [number, number];
-}[] = [
-	{ color: "R", piece: Piece.Rat, position: [0, 2] },
-	{ color: "R", piece: Piece.Cat, position: [5, 1] },
-	{ color: "R", piece: Piece.Dog, position: [1, 1] },
-	{ color: "R", piece: Piece.Wolf, position: [4, 2] },
-	{ color: "R", piece: Piece.Cheetah, position: [2, 2] },
-	{ color: "R", piece: Piece.Tiger, position: [6, 0] },
-	{ color: "R", piece: Piece.Lion, position: [0, 0] },
-	{ color: "R", piece: Piece.Elephant, position: [6, 2] },
-	{ color: "B", piece: Piece.Rat, position: [6, 6] },
-	{ color: "B", piece: Piece.Cat, position: [1, 7] },
-	{ color: "B", piece: Piece.Dog, position: [5, 7] },
-	{ color: "B", piece: Piece.Wolf, position: [2, 6] },
-	{ color: "B", piece: Piece.Cheetah, position: [4, 6] },
-	{ color: "B", piece: Piece.Tiger, position: [0, 8] },
-	{ color: "B", piece: Piece.Lion, position: [6, 8] },
-	{ color: "B", piece: Piece.Elephant, position: [0, 6] },
+export const startingPieces: PieceData[] = [
+	{ team: "R", name: Piece.Rat, position: [0, 2] },
+	{ team: "R", name: Piece.Cat, position: [5, 1] },
+	{ team: "R", name: Piece.Dog, position: [1, 1] },
+	{ team: "R", name: Piece.Wolf, position: [4, 2] },
+	{ team: "R", name: Piece.Cheetah, position: [2, 2] },
+	{ team: "R", name: Piece.Tiger, position: [6, 0] },
+	{ team: "R", name: Piece.Lion, position: [0, 0] },
+	{ team: "R", name: Piece.Elephant, position: [6, 2] },
+	{ team: "B", name: Piece.Rat, position: [6, 6] },
+	{ team: "B", name: Piece.Cat, position: [1, 7] },
+	{ team: "B", name: Piece.Dog, position: [5, 7] },
+	{ team: "B", name: Piece.Wolf, position: [2, 6] },
+	{ team: "B", name: Piece.Cheetah, position: [4, 6] },
+	{ team: "B", name: Piece.Tiger, position: [0, 8] },
+	{ team: "B", name: Piece.Lion, position: [6, 8] },
+	{ team: "B", name: Piece.Elephant, position: [0, 6] },
 ];
 
 export default boardState;

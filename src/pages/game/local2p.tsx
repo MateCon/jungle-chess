@@ -5,14 +5,34 @@ import GameSquare from '../../components/GameSquare';
 import Navbar from '../../components/Navbar'
 import boardState, { startingPieces } from '../../constants/boardState/default';
 import gameObjects from '../../constants/grids/default';
-import { getPossibleMoves } from '../../helpers/game/gameMethods';
-import { Piece } from '../../types/game';
+import { diffToDirection } from '../../helpers/game/board';
+import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
+import { PieceData, Turn } from '../../types/game';
 
 const Local2P: NextPage = () => {
   const [state, setState] = useState(boardState);
-  const [pieces, setPieces] = useState(startingPieces);
+  const [pieces, setPieces] = useState<PieceData[]>(startingPieces);
   const [active, setActive] = useState<[number, number][]>([]);
   const [possibleMoves, setPossibleMoves] = useState<[number, number][]>([]);
+  const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
+  const [turn, setTurn] = useState<Turn>("B");
+
+  const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
+
+  const movePiece = (move: string, diff: [number, number], position: [number, number]): boolean => {
+    const data = movePieceMethod(gameObjects, state, pieces, turn, move, position);
+    if (!data) return false;
+    const { newState, newPieces } = data;
+    setState(newState);
+    setPieces(newPieces);
+    toggleTurn();
+    setActive([
+      position,
+      [position[0] + diff[0], position[1] + diff[1]],
+    ]);
+    setPossibleMoves([]);
+    return true;
+  }
 
   return (
     <>
@@ -30,53 +50,35 @@ const Local2P: NextPage = () => {
                   isActive={active.filter((el) => el[0] === x && el[1] === y).length > 0}
                   isPossibleMove={possibleMoves.filter((el) => el[0] === x && el[1] === y).length > 0}
                   onClick={(canMove: boolean) => {
-                    if (canMove) {
-                      // move the piece
-                      console.log("move the piece");
-                    } else {
+                    if (!canMove) {
                       setPossibleMoves([]);
+                      return;
                     }
+                    const name = state[selectedPiece![1]][selectedPiece![0]][1];
+                    const diff: [number, number] = [-(selectedPiece![0] - x), -(selectedPiece![1] - y)];
+                    const direction = diffToDirection(diff);
+                    if (!direction) return false;
+                    return movePiece(`${name}${direction}`, diff, selectedPiece!);
                   }}
                 />
               ))}
             </div>
-            {pieces.map(({ color, piece, position: [x, y] }, index) =>
+            {pieces.map(({ team, name, position: [x, y] }) =>
               <GamePiece
-                key={`${color}${piece}`}
+                key={`${team}${name}`}
                 x={x}
                 y={y}
-                piece={color + piece}
+                piece={team + name}
                 boardSize={[(state[0].length - 1) * 64, (state.length - 1) * 64]}
+                turn={turn}
                 onClick={() => {
                   setPossibleMoves([...getPossibleMoves(state, gameObjects, [x, y])]);
+                  setSelectedPiece([x, y]);
                 }}
                 onRelease={(diff: [number, number]) => {
-                  const newPosition = [x + diff[0], y + diff[1]];
-                  if (getPossibleMoves(state, gameObjects, [x, y])
-                    .filter(el => el[0] === newPosition[0] && el[1] === newPosition[1])
-                    .length !== 1) return false;
-                  let piecesCopy = [...pieces];
-                  piecesCopy[index].position = [
-                    newPosition[0],
-                    newPosition[1]
-                  ];
-                  for (let i = 0; i < pieces.length; i++) {
-                    if (i === index) continue;
-                    const pos = pieces[i].position;
-                    if (pos[0] === newPosition[0] && pos[1] === newPosition[1]) {
-                      piecesCopy = [...piecesCopy.slice(0, i), ...piecesCopy.slice(i + 1)];
-                    }
-                  }
-                  setPieces(piecesCopy);
-
-                  const gridCopy = [...state.map(v => [...v])];
-                  gridCopy[y + diff[1]][x + diff[0]] = gridCopy[y][x];
-                  gridCopy[y][x] = Piece.Empty;
-                  setState(gridCopy);
-
-                  setActive([[x, y], [x + diff[0], y + diff[1]]]);
-                  setPossibleMoves([]);
-                  return true;
+                  const direction = diffToDirection(diff);
+                  if (!direction) return false;
+                  return movePiece(`${name}${direction}`, diff, [x, y]);
                 }}
               />
             )}

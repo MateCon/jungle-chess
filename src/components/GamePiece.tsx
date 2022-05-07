@@ -3,6 +3,7 @@ import Image from "next/image";
 import { animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { clamp } from "../helpers/math";
+import { Turn } from "../types/game";
 
 interface Props {
     piece: string,
@@ -10,13 +11,14 @@ interface Props {
     y: number,
     onClick: () => void,
     onRelease: (diff: [number, number]) => boolean,
-    boardSize: [number, number]
+    boardSize: [number, number],
+    turn: Turn
 }
 
 const SQUARE_SIZE = 64;
 const padding = 50;
 
-const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease }) => {
+const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn }) => {
     const [position, setPosition] = useState([x * SQUARE_SIZE, y * SQUARE_SIZE]);
     const [isPressed, setIsPressed] = useState(false);
 
@@ -35,6 +37,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease }) =>
     }
 
     const bind = useDrag(({ down, movement: [mx, my] }) => {
+        if (turn !== piece[0]) return;
         if (down) {
             if (!isPressed) {
                 onClick();
@@ -50,7 +53,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease }) =>
 
     return <animated.div
         {...bind()}
-        className={`absolute hover:cursor-pointer hover:z-10`}
+        className={`absolute ${turn === piece[0] && 'hover:cursor-pointer'} hover:z-10`}
         style={{
             top: clamp(position[1], -padding, boardSize[1] + padding),
             left: clamp(position[0], -padding, boardSize[0] + padding),
