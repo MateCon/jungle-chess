@@ -74,10 +74,13 @@ const Local2P: NextPage = () => {
                 onClick={() => {
                   setPossibleMoves([...getPossibleMoves(state, gameObjects, [x, y])]);
                   setSelectedPiece([x, y]);
+                  setActive([...active, [x, y]])
                 }}
                 onRelease={(diff: [number, number]) => {
                   const direction = diffToDirection(diff);
                   if (!direction) return false;
+                  if (active.length === 3) setActive(active.slice(0, 1));
+                  else setActive([]);
                   return movePiece(`${name}${direction}`, diff, [x, y]);
                 }}
               />
