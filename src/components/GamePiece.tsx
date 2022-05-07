@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
+import { clamp } from "../helpers/math";
 
 interface Props {
     piece: string,
@@ -9,11 +10,13 @@ interface Props {
     y: number,
     onClick: () => void,
     onRelease: (diff: [number, number]) => boolean,
+    boardSize: [number, number]
 }
 
 const SQUARE_SIZE = 64;
+const padding = 64;
 
-const GamePiece: FC<Props> = ({ piece, x, y, onClick, onRelease }) => {
+const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease }) => {
     const [position, setPosition] = useState([x * SQUARE_SIZE, y * SQUARE_SIZE]);
     const [isPressed, setIsPressed] = useState(false);
 
@@ -49,8 +52,8 @@ const GamePiece: FC<Props> = ({ piece, x, y, onClick, onRelease }) => {
         {...bind()}
         className={`absolute hover:cursor-pointer hover:z-10`}
         style={{
-            top: position[1],
-            left: position[0],
+            top: clamp(position[1], -padding, boardSize[1] + padding),
+            left: clamp(position[0], -padding, boardSize[0] + padding),
         }}
     >
         <div className="w-16 h-16 rounded-full overflow-hidden scale-75">

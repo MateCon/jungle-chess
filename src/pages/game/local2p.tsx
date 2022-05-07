@@ -42,6 +42,7 @@ const Home: NextPage = () => {
                 x={x}
                 y={y}
                 piece={color + piece}
+                boardSize={[(state[0].length - 1) * 64, (state.length - 1) * 64]}
                 onClick={() => {
                   setActive([...possibleMoves(state, grid, [x, y])]);
                 }}

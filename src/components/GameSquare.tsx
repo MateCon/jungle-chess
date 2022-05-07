@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from "react";
-import { isEven } from "../helpers/matrix";
 import { GameObject } from "../types/game";
 import Image from "next/image";
+import { isEvenInMatrix } from "../helpers/math";
 
 interface Props {
   object: GameObject,
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const GameSquare: FC<Props> = ({ object, x, y, isActive, onClick }) => {
-  const [isLight] = useState(() => isEven(x, y));
+  const [isLight] = useState(() => isEvenInMatrix(x, y));
 
   const color = useMemo(() => {
     if (isActive) return 'bg-warning-300';
