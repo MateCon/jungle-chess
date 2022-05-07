@@ -2,7 +2,7 @@ import { GameObject, Piece } from "../types/game";
 import { isInBounds, possibleDirections } from "./board";
 import { canEat } from "./piece";
 
-export const possibleMoves = (
+export const getPossibleMoves = (
 	pieces: string[][],
 	state: GameObject[][],
 	position: [number, number]

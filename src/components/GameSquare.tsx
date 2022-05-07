@@ -8,25 +8,27 @@ interface Props {
   x: number,
   y: number,
   isActive: boolean,
+  isPossibleMove: boolean,
   onClick: (isActive: boolean) => void
 }
 
-const GameSquare: FC<Props> = ({ object, x, y, isActive, onClick }) => {
+const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick }) => {
   const [isLight] = useState(() => isEvenInMatrix(x, y));
 
   const color = useMemo(() => {
-    if (isActive) return 'bg-warning-300';
     if (object === GameObject.Water)
       return isLight ? 'bg-secondary-500' : 'bg-secondary-700';
     else
       return isLight ? 'bg-primary-500' : 'bg-primary-700';
-  }, [object, isLight, isActive]);
+  }, [object, isLight]);
 
   return (
     <div
       className={`${color} w-16 h-16 grid place-items-center`}
-      onClick={() => onClick(isActive)}
+      onClick={() => onClick(isPossibleMove)}
     >
+      {isActive && <div className='bg-[rgba(255,255,0,0.5)] w-full h-full' />}
+      {isPossibleMove && <div className='absolute bg-[rgba(40,40,40,0.8)] w-4 h-4 rounded-full' />}
       {object === GameObject.End &&
         <Image
           src="/static/assets/objects/end.png"

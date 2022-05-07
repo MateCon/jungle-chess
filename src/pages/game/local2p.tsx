@@ -5,13 +5,14 @@ import GameSquare from '../../components/GameSquare';
 import Navbar from '../../components/Navbar'
 import boardState, { startingPieces } from '../../constants/boardState/default';
 import grid from '../../constants/grids/default';
-import { possibleMoves } from '../../helpers/gameMethods';
+import { getPossibleMoves } from '../../helpers/gameMethods';
 import { Piece } from '../../types/game';
 
 const Home: NextPage = () => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState(startingPieces);
   const [active, setActive] = useState<[number, number][]>([]);
+  const [possibleMoves, setPossibleMoves] = useState<[number, number][]>([]);
 
   return (
     <>
@@ -27,10 +28,13 @@ const Home: NextPage = () => {
                   x={x}
                   y={y}
                   isActive={active.filter((el) => el[0] === x && el[1] === y).length > 0}
-                  onClick={(isActive: boolean) => {
-                    if (isActive) { }
-                    else {
-                      setActive([]);
+                  isPossibleMove={possibleMoves.filter((el) => el[0] === x && el[1] === y).length > 0}
+                  onClick={(canMove: boolean) => {
+                    if (canMove) {
+                      // move the piece
+                      console.log("move the piece");
+                    } else {
+                      setPossibleMoves([]);
                     }
                   }}
                 />
@@ -44,11 +48,11 @@ const Home: NextPage = () => {
                 piece={color + piece}
                 boardSize={[(state[0].length - 1) * 64, (state.length - 1) * 64]}
                 onClick={() => {
-                  setActive([...possibleMoves(state, grid, [x, y])]);
+                  setPossibleMoves([...getPossibleMoves(state, grid, [x, y])]);
                 }}
                 onRelease={(diff: [number, number]) => {
                   const newPosition = [x + diff[0], y + diff[1]];
-                  if (possibleMoves(state, grid, [x, y])
+                  if (getPossibleMoves(state, grid, [x, y])
                     .filter(el => el[0] === newPosition[0] && el[1] === newPosition[1])
                     .length !== 1) return false;
                   let piecesCopy = [...pieces];
@@ -71,6 +75,7 @@ const Home: NextPage = () => {
                   setState(gridCopy);
 
                   setActive([[x, y], [x + diff[0], y + diff[1]]]);
+                  setPossibleMoves([]);
                   return true;
                 }}
               />
