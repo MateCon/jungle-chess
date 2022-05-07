@@ -9,29 +9,29 @@ interface Props {
     piece: string,
     x: number,
     y: number,
+    cellSize: number,
     onClick: () => void,
     onRelease: (diff: [number, number]) => boolean,
     boardSize: [number, number],
     turn: Turn
 }
 
-const SQUARE_SIZE = 64;
 const padding = 50;
 
-const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn }) => {
-    const [position, setPosition] = useState([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn, cellSize }) => {
+    const [position, setPosition] = useState([x * cellSize, y * cellSize]);
     const [isPressed, setIsPressed] = useState(false);
 
     useEffect(() => {
-        setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
-    }, [x, y]);
+        setPosition([x * cellSize, y * cellSize]);
+    }, [x, y, cellSize]);
 
     const onDragEnd = (diff: [number, number]) => {
         if (diff[0] !== 0 || diff[1] !== 0) {
             const hasMoved = onRelease(diff);
-            if (!hasMoved) setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+            if (!hasMoved) setPosition([x * cellSize, y * cellSize]);
         } else {
-            setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+            setPosition([x * cellSize, y * cellSize]);
         }
         setIsPressed(false);
     }
@@ -43,11 +43,11 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
                 onClick();
             }
             setIsPressed(true);
-            setPosition([x * SQUARE_SIZE + mx, y * SQUARE_SIZE + my]);
+            setPosition([x * cellSize + mx, y * cellSize + my]);
             return;
         }
-        const diffX = Math.floor((mx + SQUARE_SIZE / 2) / SQUARE_SIZE);
-        const diffY = Math.floor((my + SQUARE_SIZE / 2) / SQUARE_SIZE);
+        const diffX = Math.floor((mx + cellSize / 2) / cellSize);
+        const diffY = Math.floor((my + cellSize / 2) / cellSize);
         onDragEnd([diffX, diffY]);
     })
 

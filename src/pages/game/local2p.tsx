@@ -9,6 +9,8 @@ import { diffToDirection } from '../../helpers/game/board';
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { PieceData, Turn } from '../../types/game';
 
+const CELL_SIZE = 64;
+
 const Local2P: NextPage = () => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState<PieceData[]>(startingPieces);
@@ -47,6 +49,7 @@ const Local2P: NextPage = () => {
                   object={object}
                   x={x}
                   y={y}
+                  cellSize={CELL_SIZE}
                   isActive={active.filter((el) => el[0] === x && el[1] === y).length > 0}
                   isPossibleMove={possibleMoves.filter((el) => el[0] === x && el[1] === y).length > 0}
                   onClick={(canMove: boolean) => {
@@ -68,6 +71,7 @@ const Local2P: NextPage = () => {
                 key={`${team}${name}`}
                 x={x}
                 y={y}
+                cellSize={CELL_SIZE}
                 piece={team + name}
                 boardSize={[(state[0].length - 1) * 64, (state.length - 1) * 64]}
                 turn={turn}

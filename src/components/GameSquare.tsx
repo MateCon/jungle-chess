@@ -9,10 +9,11 @@ interface Props {
   y: number,
   isActive: boolean,
   isPossibleMove: boolean,
-  onClick: (isActive: boolean) => void
+  onClick: (isActive: boolean) => void,
+  cellSize: number
 }
 
-const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick }) => {
+const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick, cellSize }) => {
   const [isLight] = useState(() => isEvenInMatrix(x, y));
 
   const color = useMemo(() => {
@@ -24,7 +25,7 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
 
   return (
     <div
-      className={`${color} w-16 h-16 grid place-items-center`}
+      className={`${color} w-[${cellSize}px] h-[${cellSize}px] grid place-items-center`}
       onClick={() => onClick(isPossibleMove)}
     >
       {isActive && <div className='bg-[rgba(255,255,0,0.3)] w-full h-full' />}
@@ -33,16 +34,16 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
         <Image
           src="/static/assets/objects/end.png"
           alt="end object"
-          width={48}
-          height={48}
+          width={cellSize * 0.75}
+          height={cellSize * 0.75}
           draggable={false}
         />}
       {object === GameObject.Trap &&
         <Image
           src="/static/assets/objects/trap.png"
           alt="end object"
-          width={48}
-          height={48}
+          width={cellSize * 0.75}
+          height={cellSize * 0.75}
           draggable={false}
         />}
     </div>
@@ -50,3 +51,9 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
 }
 
 export default GameSquare;
+
+/*
+no borrar este comentario, es para que 
+postcss compile estos estilos
+w-[64px] h-[64px]
+*/
