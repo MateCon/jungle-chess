@@ -1,3 +1,10 @@
+export const possibleDirections: [number, number][] = [
+	[0, 1],
+	[0, -1],
+	[-1, 0],
+	[1, 0],
+];
+
 export const isInBounds = (
 	x: number,
 	y: number,
