@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { isEven } from "../helpers/matrix";
 import { GameObject } from "../types/game";
 import Image from "next/image";
@@ -6,21 +6,27 @@ import Image from "next/image";
 interface Props {
   object: GameObject,
   x: number,
-  y: number
+  y: number,
+  isActive: boolean,
+  onClick: (isActive: boolean) => void
 }
 
-const GameSquare: FC<Props> = ({ object, x, y }) => {
+const GameSquare: FC<Props> = ({ object, x, y, isActive, onClick }) => {
   const [isLight] = useState(() => isEven(x, y));
 
-  let color = "";
-  if (object === GameObject.Water) {
-    color = isLight ? 'bg-secondary-500' : 'bg-secondary-700';
-  } else {
-    color = isLight ? 'bg-primary-500' : 'bg-primary-700';
-  }
+  const color = useMemo(() => {
+    if (isActive) return 'bg-warning-300';
+    if (object === GameObject.Water)
+      return isLight ? 'bg-secondary-500' : 'bg-secondary-700';
+    else
+      return isLight ? 'bg-primary-500' : 'bg-primary-700';
+  }, [object, isLight, isActive]);
 
   return (
-    <div className={`${color} w-16 h-16 grid place-items-center`}>
+    <div
+      className={`${color} w-16 h-16 grid place-items-center`}
+      onClick={() => onClick(isActive)}
+    >
       {object === GameObject.End &&
         <Image
           src="/static/assets/objects/end.png"

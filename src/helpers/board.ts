@@ -1,6 +1,6 @@
-import { GameObject, Piece } from '../types/game';
-import grid from '../constants/grids/default';
-
-export const isOutOfBounds = (col: number, row: number, width: number, height: number) => {
-    return !(row < 0 || row >= width || col < 0 || row >= height);
-}
+export const isInBounds = (
+	x: number,
+	y: number,
+	width: number,
+	height: number
+) => x >= 0 && x < width && y >= 0 && y < height;

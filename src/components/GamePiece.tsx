@@ -1,33 +1,47 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import { animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
+import { animated } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
 
 interface Props {
     piece: string,
     x: number,
     y: number,
+    onClick: () => void,
+    onRelease: (diff: [number, number]) => boolean,
 }
 
 const SQUARE_SIZE = 64;
 
-const GamePiece: FC<Props> = ({ piece, x, y }) => {
+const GamePiece: FC<Props> = ({ piece, x, y, onClick, onRelease }) => {
     const [position, setPosition] = useState([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+    const [isPressed, setIsPressed] = useState(false);
+
+    useEffect(() => {
+        setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+    }, [x, y]);
 
     const onDragEnd = (diff: [number, number]) => {
-        console.log(diff);
-        // check if move is valid here
-        // reset position otherwise
-        setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+        if (diff[0] !== 0 || diff[1] !== 0) {
+            const hasMoved = onRelease(diff);
+            if (!hasMoved) setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+        } else {
+            setPosition([x * SQUARE_SIZE, y * SQUARE_SIZE]);
+        }
+        setIsPressed(false);
     }
 
     const bind = useDrag(({ down, movement: [mx, my] }) => {
         if (down) {
+            if (!isPressed) {
+                onClick();
+            }
+            setIsPressed(true);
             setPosition([x * SQUARE_SIZE + mx, y * SQUARE_SIZE + my]);
             return;
         }
         const diffX = Math.floor((mx + SQUARE_SIZE / 2) / SQUARE_SIZE);
-        const diffY = Math.floor((-my + SQUARE_SIZE / 2) / SQUARE_SIZE);
+        const diffY = Math.floor((my + SQUARE_SIZE / 2) / SQUARE_SIZE);
         onDragEnd([diffX, diffY]);
     })
 
