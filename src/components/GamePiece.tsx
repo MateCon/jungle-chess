@@ -53,7 +53,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
 
     return <animated.div
         {...bind()}
-        className={`absolute ${turn === piece[0] && 'hover:cursor-pointer'} hover:z-10`}
+        className={`absolute ${turn === piece[0] && 'hover:cursor-pointer'} ${isPressed ? 'hover:z-30' : 'hover:z-10'}`}
         style={{
             top: clamp(position[1], -padding, boardSize[1] + padding),
             left: clamp(position[0], -padding, boardSize[0] + padding),
