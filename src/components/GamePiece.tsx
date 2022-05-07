@@ -14,7 +14,7 @@ interface Props {
 }
 
 const SQUARE_SIZE = 64;
-const padding = 64;
+const padding = 50;
 
 const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease }) => {
     const [position, setPosition] = useState([x * SQUARE_SIZE, y * SQUARE_SIZE]);
