@@ -27,7 +27,7 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
       className={`${color} w-16 h-16 grid place-items-center`}
       onClick={() => onClick(isPossibleMove)}
     >
-      {isActive && <div className='bg-[rgba(255,255,0,0.5)] w-full h-full' />}
+      {isActive && <div className='bg-[rgba(255,255,0,0.3)] w-full h-full' />}
       {isPossibleMove && <div className='absolute bg-[rgba(40,40,40,0.8)] w-4 h-4 rounded-full' />}
       {object === GameObject.End &&
         <Image

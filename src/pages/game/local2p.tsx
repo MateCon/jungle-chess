@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import GamePiece from '../../components/GamePiece';
 import GameSquare from '../../components/GameSquare';
 import Navbar from '../../components/Navbar'
 import boardState, { startingPieces } from '../../constants/boardState/default';
-import grid from '../../constants/grids/default';
-import { getPossibleMoves } from '../../helpers/gameMethods';
+import gameObjects from '../../constants/grids/default';
+import { getPossibleMoves } from '../../helpers/game/gameMethods';
 import { Piece } from '../../types/game';
 
-const Home: NextPage = () => {
+const Local2P: NextPage = () => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState(startingPieces);
   const [active, setActive] = useState<[number, number][]>([]);
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         <div className='grid w-full h-screen place-items-center shadow-xl'>
           <div className='relative'>
             <div className="grid grid-cols-7 w-fit">
-              {grid.map((row, y) => row.map((object, x) =>
+              {gameObjects.map((row, y) => row.map((object, x) =>
                 <GameSquare
                   key={`${x}-${y}`}
                   object={object}
@@ -48,11 +48,11 @@ const Home: NextPage = () => {
                 piece={color + piece}
                 boardSize={[(state[0].length - 1) * 64, (state.length - 1) * 64]}
                 onClick={() => {
-                  setPossibleMoves([...getPossibleMoves(state, grid, [x, y])]);
+                  setPossibleMoves([...getPossibleMoves(state, gameObjects, [x, y])]);
                 }}
                 onRelease={(diff: [number, number]) => {
                   const newPosition = [x + diff[0], y + diff[1]];
-                  if (getPossibleMoves(state, grid, [x, y])
+                  if (getPossibleMoves(state, gameObjects, [x, y])
                     .filter(el => el[0] === newPosition[0] && el[1] === newPosition[1])
                     .length !== 1) return false;
                   let piecesCopy = [...pieces];
@@ -86,4 +86,4 @@ const Home: NextPage = () => {
     </>
   )
 }
-export default Home
+export default Local2P

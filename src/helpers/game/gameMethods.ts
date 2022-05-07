@@ -1,15 +1,15 @@
-import { GameObject, Piece } from "../types/game";
+import { GameObject, Piece } from "../../types/game";
 import { isInBounds, possibleDirections } from "./board";
 import { canEat } from "./piece";
 
 export const getPossibleMoves = (
-	pieces: string[][],
-	state: GameObject[][],
+	state: string[][],
+	gameObjects: GameObject[][],
 	position: [number, number]
 ): [number, number][] => {
-	const width = state[0].length;
-	const height = state.length;
-	const piece = pieces[position[1]][position[0]];
+	const width = gameObjects[0].length;
+	const height = gameObjects.length;
+	const piece = state[position[1]][position[0]];
 	let positions: [number, number][] = possibleDirections.map((dir) => [
 		position[0] + dir[0],
 		position[1] + dir[1],
@@ -20,8 +20,8 @@ export const getPossibleMoves = (
 			let curr = [...newPosition];
 			while (
 				isInBounds(curr[0], curr[1], width, height) &&
-				state[curr[1]][curr[0]] === GameObject.Water &&
-				pieces[curr[1]][curr[0]] === Piece.Empty
+				gameObjects[curr[1]][curr[0]] === GameObject.Water &&
+				state[curr[1]][curr[0]] === Piece.Empty
 			)
 				curr = [curr[0] + direction[0], curr[1] + direction[1]];
 			return [curr[0], curr[1]];
@@ -30,8 +30,8 @@ export const getPossibleMoves = (
 	return positions.filter((newPosition) => {
 		if (!isInBounds(newPosition[0], newPosition[1], width, height))
 			return false;
-		const newPiece = pieces[newPosition[1]][newPosition[0]];
-		const newObject = state[newPosition[1]][newPosition[0]];
+		const newPiece = state[newPosition[1]][newPosition[0]];
+		const newObject = gameObjects[newPosition[1]][newPosition[0]];
 		const isBlockedByWater =
 			piece[1] !== Piece.Rat && newObject === GameObject.Water;
 		const areTheSameTeam =
