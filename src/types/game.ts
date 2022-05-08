@@ -31,3 +31,10 @@ export enum MoveDirection {
 	Left = "L",
 	Right = "R",
 }
+
+export interface GameUser {
+	username: string;
+	picture: string;
+	turn: Turn;
+	elo?: number;
+}

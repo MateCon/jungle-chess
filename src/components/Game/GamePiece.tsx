@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { animated } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { clamp } from "../helpers/math";
-import { Turn } from "../types/game";
+import { clamp } from "../../helpers/math";
+import { Turn } from "../../types/game";
 
 interface Props {
     piece: string,
@@ -59,7 +59,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
             left: clamp(position[0], -padding, boardSize[0] + padding),
         }}
     >
-        <div className="w-16 h-16 rounded-full overflow-hidden scale-75">
+        <div className={`w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
             <Image
                 src={`/static/assets/pieces/${piece}.png`}
                 alt="piece"

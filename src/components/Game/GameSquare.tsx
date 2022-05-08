@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from "react";
-import { GameObject } from "../types/game";
+import { GameObject } from "../../types/game";
 import Image from "next/image";
-import { isEvenInMatrix } from "../helpers/math";
+import { isEvenInMatrix } from "../../helpers/math";
 
 interface Props {
   object: GameObject,
@@ -55,5 +55,5 @@ export default GameSquare;
 /*
 no borrar este comentario, es para que 
 postcss compile estos estilos
-w-[64px] h-[64px]
+w-[74px] h-[74px]
 */

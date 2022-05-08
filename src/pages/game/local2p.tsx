@@ -6,7 +6,7 @@ import Navbar from '../../components/Navbar'
 import boardState, { startingPieces } from '../../constants/boardState/default';
 import gameObjects from '../../constants/grids/default';
 
-const CELL_SIZE = 64;
+const CELL_SIZE = 74;
 
 // createMoveHandler example
 // const createMoveHandler = (move: (move: string, position: [number, number]) => void) => {
@@ -31,6 +31,18 @@ const Local2P: NextPage = () => {
             boardState={boardState}
             startingPieces={startingPieces}
             gameObjects={gameObjects}
+            users={[
+              {
+                turn: 'B',
+                username: 'Blue',
+                picture: 'https://lh3.googleusercontent.com/Li91lqWSznLST9xN9ZPeGUDe8I_x7iy6vZo1LQD8PsdT9n-PbGmRrc0lyQr_KyGfQSVnuCanlQnAcGgiESxXHqlwBxw',
+              },
+              {
+                turn: 'R',
+                username: 'Red',
+                picture: 'https://lh3.googleusercontent.com/Yofn-MtjvR46t7YbjS49dtb2Bae8m_QSyeZKM8g3VcthP4XXOHQQ8A-2lw4OCIzjsFsB2pQcBsH42z8CaKSNhmgfPhU',
+              }
+            ]}
           />
         </div>
       </div>
