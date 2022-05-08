@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import React from 'react';
+import React, { FC } from 'react';
 import Game from '../../components/Game';
 import Navbar from '../../components/Navbar'
 import boardState, { startingPieces } from '../../constants/boardState/default';

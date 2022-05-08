@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
-import { diffToDirection } from "../helpers/game/board";
+import { FC, ReactNode, useState } from "react";
+import { diffToDirection, directionToDiff } from "../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../helpers/game/gameMethods';
-import { GameObject, PieceData, Turn } from "../types/game";
+import { GameObject, MoveDirection, PieceData, Turn } from "../types/game";
 import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
 
@@ -10,9 +10,11 @@ interface Props {
   boardState: string[][];
   startingPieces: PieceData[];
   gameObjects: GameObject[][];
+  onMove?: (move: string, position: [number, number]) => void;
+  createMoveListener?: (move: (move: string, position: [number, number]) => void) => ReactNode;
 }
 
-const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects }) => {
+const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects, onMove, createMoveListener }) => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState<PieceData[]>(startingPieces);
   const [active, setActive] = useState<[number, number][]>([]);
@@ -22,10 +24,12 @@ const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects }) 
 
   const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
 
-  const movePiece = (move: string, diff: [number, number], position: [number, number]): boolean => {
+  const movePiece = (move: string, position: [number, number]): boolean => {
+    if (state[position[1]][position[0]][0] !== turn) return false;
     const data = movePieceMethod(gameObjects, state, pieces, turn, move, position);
     if (!data) return false;
     const { newState, newPieces } = data;
+    const diff = directionToDiff(move[1] as MoveDirection);
     setState(newState);
     setPieces(newPieces);
     toggleTurn();
@@ -34,6 +38,7 @@ const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects }) 
       [position[0] + diff[0], position[1] + diff[1]],
     ]);
     setPossibleMoves([]);
+    if (onMove) onMove(move, position);
     return true;
   }
 
@@ -58,7 +63,7 @@ const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects }) 
               const diff: [number, number] = [-(selectedPiece![0] - x), -(selectedPiece![1] - y)];
               const direction = diffToDirection(diff);
               if (!direction) return false;
-              return movePiece(`${name}${direction}`, diff, selectedPiece!);
+              return movePiece(`${name}${direction}`, selectedPiece!);
             }}
           />
         ))}
@@ -82,12 +87,13 @@ const Game: FC<Props> = ({ cellSize, boardState, startingPieces, gameObjects }) 
             if (!direction) return false;
             if (active.length === 3) setActive(active.slice(0, 1));
             else setActive([]);
-            return movePiece(`${name}${direction}`, diff, [x, y]);
+            return movePiece(`${name}${direction}`, [x, y]);
           }}
         />
       )}
+      {createMoveListener && createMoveListener(movePiece)}
     </div>
   )
-}
+};
 
 export default Game;
