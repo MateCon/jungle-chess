@@ -38,19 +38,11 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
     }
 
     const bind = useDrag(({ down, movement: [mx, my] }) => {
-        if (turn !== piece[0]) return;
-        if (down) {
-            if (!isPressed) onClick();
-            setIsPressed(true);
-            setPosition([x * cellSize + mx, y * cellSize + my]);
-            setCurrMovement([mx, my]);
-            return;
-        } else {
-            setIsPressed(false);
-            const diffX = Math.floor((mx + cellSize / 2) / cellSize);
-            const diffY = Math.floor((my + cellSize / 2) / cellSize);
-            onDragEnd([diffX, diffY]);
-        }
+        if (turn !== piece[0] || !down) return;
+        if (!isPressed) onClick();
+        setIsPressed(true);
+        setPosition([x * cellSize + mx, y * cellSize + my]);
+        setCurrMovement([mx, my]);
     })
 
     return <animated.div
