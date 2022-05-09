@@ -3,8 +3,7 @@ import Head from 'next/head';
 import React, { FC } from 'react';
 import Game from '../../components/Game';
 import Navbar from '../../components/Navbar'
-import boardState, { startingPieces } from '../../constants/boardState/default';
-import gameObjects from '../../constants/grids/default';
+import * as initialState from '../../constants/startingState/default';
 
 const CELL_SIZE = 74;
 
@@ -28,9 +27,7 @@ const Local2P: NextPage = () => {
         <div className='grid w-full h-screen place-items-center shadow-xl'>
           <Game
             cellSize={CELL_SIZE}
-            boardState={boardState}
-            startingPieces={startingPieces}
-            gameObjects={gameObjects}
+            {...initialState}
             users={[
               {
                 turn: 'B',

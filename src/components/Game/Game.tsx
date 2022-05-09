@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
@@ -11,6 +11,7 @@ interface Props {
   boardState: string[][];
   startingPieces: PieceData[];
   gameObjects: GameObject[][];
+  endSquares: { [key: string]: [number, number] },
   users: GameUser[];
   onMove?: (move: string, position: [number, number]) => void;
   createMoveListener?: (move: (move: string, position: [number, number]) => void) => ReactNode;
@@ -23,7 +24,8 @@ const Game: FC<Props> = ({
   gameObjects,
   onMove,
   createMoveListener,
-  users
+  users,
+  endSquares
 }) => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState<PieceData[]>(startingPieces);
@@ -36,7 +38,7 @@ const Game: FC<Props> = ({
 
   const movePiece = (move: string, position: [number, number]): boolean => {
     if (state[position[1]][position[0]][0] !== turn) return false;
-    const data = movePieceMethod(gameObjects, state, pieces, turn, move, position);
+    const data = movePieceMethod(gameObjects, state, pieces, turn, move, position, endSquares[turn]);
     if (!data) return false;
     const { newState, newPieces } = data;
     const direction = directionToDiff(move[1] as MoveDirection);
@@ -49,6 +51,17 @@ const Game: FC<Props> = ({
       diff[0] += direction[0];
       diff[1] += direction[1];
     }
+
+    const otherEndSquares = Object
+      .keys(endSquares)
+      .map(key => endSquares[key]);
+
+    console.log(otherEndSquares);
+
+    for (let endSquare of otherEndSquares)
+      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
+        console.log("GAME HAS ENDED");
+
     setState(newState);
     setPieces(newPieces);
     toggleTurn();
@@ -98,7 +111,7 @@ const Game: FC<Props> = ({
             boardSize={[(state[0].length - 1) * cellSize, (state.length - 1) * cellSize]}
             turn={turn}
             onClick={() => {
-              setPossibleMoves([...getPossibleMoves(state, gameObjects, [x, y])]);
+              setPossibleMoves([...getPossibleMoves(state, gameObjects, [x, y], endSquares[turn])]);
               setSelectedPiece([x, y]);
               setActive([...active, [x, y]])
             }}

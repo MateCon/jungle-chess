@@ -13,7 +13,8 @@ export const getMove = (
 	state: string[][],
 	gameObjects: GameObject[][],
 	position: [number, number],
-	direction: MoveDirection
+	direction: MoveDirection,
+	endSquare: [number, number]
 ): [number, number] | null => {
 	const width = gameObjects[0].length;
 	const height = gameObjects.length;
@@ -35,6 +36,8 @@ export const getMove = (
 	}
 
 	if (!isInBounds(newPosition[0], newPosition[1], width, height)) return null;
+	if (endSquare[0] === newPosition[0] && endSquare[1] === newPosition[1])
+		return null;
 	const newPiece = state[newPosition[1]][newPosition[0]];
 	const newObject = gameObjects[newPosition[1]][newPosition[0]];
 	const isBlockedByWater =
@@ -49,10 +52,11 @@ export const getMove = (
 export const getPossibleMoves = (
 	state: string[][],
 	gameObjects: GameObject[][],
-	position: [number, number]
+	position: [number, number],
+	endSquare: [number, number]
 ): [number, number][] => {
 	return possibleDirections
-		.map((dir) => getMove(state, gameObjects, position, dir))
+		.map((dir) => getMove(state, gameObjects, position, dir, endSquare))
 		.filter((val) => val !== null) as [number, number][];
 };
 
@@ -62,22 +66,23 @@ export const movePiece = (
 	pieces: PieceData[],
 	turn: Turn,
 	move: string,
-	position: [number, number] | undefined = undefined
+	position: [number, number] | undefined = undefined,
+	endSquare: [number, number]
 ): { newState: string[][]; newPieces: PieceData[] } | undefined => {
 	if (!position) position = findInMatrix<string>(state, `${turn}${move[0]}`);
 	if (!position) return undefined;
 
-	const diff = directionToDiff(move[1] as MoveDirection);
 	const newPosition = getMove(
 		state,
 		gameObjects,
 		position,
-		move[1] as MoveDirection
+		move[1] as MoveDirection,
+		endSquare
 	);
 	if (!newPosition) return undefined;
 
 	if (
-		getPossibleMoves(state, gameObjects, position).filter(
+		getPossibleMoves(state, gameObjects, position, endSquare).filter(
 			(el) => el[0] === newPosition[0] && el[1] === newPosition[1]
 		).length !== 1
 	)

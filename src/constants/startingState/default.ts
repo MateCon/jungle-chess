@@ -1,6 +1,24 @@
-import { Piece, PieceData } from "../../types/game";
+import { Piece, PieceData, Turn } from "../../types/game";
+import { GameObject as GO } from "../../types/game";
 
-const boardState: string[][] = [
+export const gameObjects: GO[][] = [
+	[GO.Land, GO.Land, GO.Trap, GO.End, GO.Trap, GO.Land, GO.Land],
+	[GO.Land, GO.Land, GO.Land, GO.Trap, GO.Land, GO.Land, GO.Land],
+	[GO.Land, GO.Land, GO.Land, GO.Land, GO.Land, GO.Land, GO.Land],
+	[GO.Land, GO.Water, GO.Water, GO.Land, GO.Water, GO.Water, GO.Land],
+	[GO.Land, GO.Water, GO.Water, GO.Land, GO.Water, GO.Water, GO.Land],
+	[GO.Land, GO.Water, GO.Water, GO.Land, GO.Water, GO.Water, GO.Land],
+	[GO.Land, GO.Land, GO.Land, GO.Land, GO.Land, GO.Land, GO.Land],
+	[GO.Land, GO.Land, GO.Land, GO.Trap, GO.Land, GO.Land, GO.Land],
+	[GO.Land, GO.Land, GO.Trap, GO.End, GO.Trap, GO.Land, GO.Land],
+];
+
+export const endSquares: { [key: string]: [number, number] } = {
+	R: [3, 0],
+	B: [3, 8],
+};
+
+export const boardState: string[][] = [
 	[
 		`R${Piece.Lion}`,
 		Piece.Empty,
@@ -102,5 +120,3 @@ export const startingPieces: PieceData[] = [
 	{ team: "B", name: Piece.Lion, position: [6, 8] },
 	{ team: "B", name: Piece.Elephant, position: [0, 6] },
 ];
-
-export default boardState;
