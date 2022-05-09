@@ -16,7 +16,7 @@ interface Props {
     turn: Turn
 }
 
-const padding = 50;
+const padding = 36;
 
 const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn, cellSize }) => {
     const [position, setPosition] = useState([x * cellSize, y * cellSize]);

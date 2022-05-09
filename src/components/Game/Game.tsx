@@ -39,7 +39,16 @@ const Game: FC<Props> = ({
     const data = movePieceMethod(gameObjects, state, pieces, turn, move, position);
     if (!data) return false;
     const { newState, newPieces } = data;
-    const diff = directionToDiff(move[1] as MoveDirection);
+    const direction = directionToDiff(move[1] as MoveDirection);
+    let diff = [direction[0], direction[1]];
+    while (
+      gameObjects[0].length > position[0] + diff[0] &&
+      gameObjects.length > position[1] + diff[1] &&
+      gameObjects[position[1] + diff[1]][position[0] + diff[0]] === GameObject.Water
+    ) {
+      diff[0] += direction[0];
+      diff[1] += direction[1];
+    }
     setState(newState);
     setPieces(newPieces);
     toggleTurn();
