@@ -21,6 +21,7 @@ const padding = 50;
 const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn, cellSize }) => {
     const [position, setPosition] = useState([x * cellSize, y * cellSize]);
     const [isPressed, setIsPressed] = useState(false);
+    const [currMovement, setCurrMovement] = useState<[number, number]>([-1, -1]);
 
     useEffect(() => {
         setPosition([x * cellSize, y * cellSize]);
@@ -39,16 +40,17 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
     const bind = useDrag(({ down, movement: [mx, my] }) => {
         if (turn !== piece[0]) return;
         if (down) {
-            if (!isPressed) {
-                onClick();
-            }
+            if (!isPressed) onClick();
             setIsPressed(true);
             setPosition([x * cellSize + mx, y * cellSize + my]);
+            setCurrMovement([mx, my]);
             return;
+        } else {
+            setIsPressed(false);
+            const diffX = Math.floor((mx + cellSize / 2) / cellSize);
+            const diffY = Math.floor((my + cellSize / 2) / cellSize);
+            onDragEnd([diffX, diffY]);
         }
-        const diffX = Math.floor((mx + cellSize / 2) / cellSize);
-        const diffY = Math.floor((my + cellSize / 2) / cellSize);
-        onDragEnd([diffX, diffY]);
     })
 
     return <animated.div
@@ -57,6 +59,13 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
         style={{
             top: clamp(position[1], -padding, boardSize[1] + padding),
             left: clamp(position[0], -padding, boardSize[0] + padding),
+        }}
+        onMouseUp={() => {
+            if (!isPressed) return;
+            setIsPressed(false);
+            const diffX = Math.floor((currMovement[0] + cellSize / 2) / cellSize);
+            const diffY = Math.floor((currMovement[1] + cellSize / 2) / cellSize);
+            onDragEnd([diffX, diffY]);
         }}
     >
         <div className={`w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
