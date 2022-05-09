@@ -25,8 +25,7 @@ const getPieceValue = (piece: string): number => {
 
 export const canEat = (p1: string, p2: string): boolean => {
 	if (p2.length === 1) return true;
-	if (p1[0] === p2[0]) return false;
 	if (Math.abs(getPieceValue(p1[1]) - getPieceValue(p2[1])) === 7)
 		return getPieceValue(p1[1]) < getPieceValue(p2[1]);
-	return getPieceValue(p1[1]) > getPieceValue(p2[1]);
+	return getPieceValue(p1[1]) >= getPieceValue(p2[1]);
 };
