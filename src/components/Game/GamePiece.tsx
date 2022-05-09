@@ -59,6 +59,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
         style={{
             top: clamp(position[1], -padding, boardSize[1] + padding),
             left: clamp(position[0], -padding, boardSize[0] + padding),
+            touchAction: 'none'
         }}
         onMouseUp={() => {
             if (!isPressed) return;
@@ -68,7 +69,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
             onDragEnd([diffX, diffY]);
         }}
     >
-        <div className={`w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
+        <div className={`relative w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
             <Image
                 src={`/static/assets/pieces/${piece}.png`}
                 alt="piece"

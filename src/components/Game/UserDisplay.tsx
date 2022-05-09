@@ -10,7 +10,7 @@ const UserDisplay: FC<{
     return (
         <div className={`flex flex-col ${user.turn === 'B' && 'flex-col-reverse'}`}>
             <div className="flex flex-row place-items-center gap1">
-                <div className="w-16 h-16 rounded-full overflow-hidden scale-75">
+                <div className="relative w-16 h-16 rounded-full overflow-hidden scale-75">
                     <Image
                         src={user.picture}
                         alt="user picture"

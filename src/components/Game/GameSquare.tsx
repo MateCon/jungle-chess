@@ -27,7 +27,6 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
     <div
       className={`${color} w-[${cellSize}px] h-[${cellSize}px] grid place-items-center`}
       onClick={() => {
-        console.log('ahh')
         onClick(isPossibleMove)
       }}
     >

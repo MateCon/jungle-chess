@@ -56,8 +56,6 @@ const Game: FC<Props> = ({
       .keys(endSquares)
       .map(key => endSquares[key]);
 
-    console.log(otherEndSquares);
-
     for (let endSquare of otherEndSquares)
       if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
         console.log("GAME HAS ENDED");
