@@ -126,12 +126,12 @@ const Game: FC<Props> = ({
       </div>
       <div className="max-h-max flex flex-col justify-between">
         <UserDisplay
-          user={users[0]}
+          user={users[1]}
           turn={turn}
           time="10:00"
         />
         <UserDisplay
-          user={users[1]}
+          user={users[0]}
           turn={turn}
           time="10:00"
         />
