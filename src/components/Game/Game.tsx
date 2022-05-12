@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
@@ -33,6 +33,7 @@ const Game: FC<Props> = ({
   const [possibleMoves, setPossibleMoves] = useState<[number, number][]>([]);
   const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
   const [turn, setTurn] = useState<Turn>("B");
+  const [moveList, setMoveList] = useState<string[][]>([]);
 
   const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
 
@@ -68,6 +69,13 @@ const Game: FC<Props> = ({
       [position[0] + diff[0], position[1] + diff[1]],
     ]);
     setPossibleMoves([]);
+    if (moveList.length > 0 && moveList[moveList.length - 1].length === 1) {
+      const copy = [...moveList];
+      copy[copy.length - 1] = [copy[copy.length - 1][0], move];
+      setMoveList(copy);
+    } else {
+      setMoveList([...moveList, [move]]);
+    }
     if (onMove) onMove(move, position);
     return true;
   }
@@ -124,19 +132,39 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      <div className="max-h-max flex flex-col justify-between">
+      <div className={`flex flex-col ml-8 shadow-md`}>
         <UserDisplay
           user={users[1]}
           turn={turn}
           time="10:00"
         />
+        <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden`}>
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th className="py-2">{users[0].username}</th>
+                <th>{users[1].username}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {moveList.map((row, j) =>
+                <tr key={j} className={`w-full ${j % 2 === 0 ? 'bg-[rgba(0,0,0,0.3)]' : ''}`}>
+                  <td className="text-center py-1">{j + 1}.</td>
+                  <td className="text-center font-medium">{row[0]}</td>
+                  <td className="text-center font-medium">{row[1]}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
         <UserDisplay
           user={users[0]}
           turn={turn}
           time="10:00"
         />
       </div>
-    </div>
+    </div >
   )
 };
 
