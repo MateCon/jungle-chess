@@ -4,6 +4,7 @@ import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/ga
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
 import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
+import MoveList from "./MoveList";
 import UserDisplay from "./UserDisplay";
 
 interface Props {
@@ -132,31 +133,14 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      <div className={`flex flex-col ml-8 shadow-md`}>
+      <div className={`flex flex-col ml-8`}>
         <UserDisplay
           user={users[1]}
           turn={turn}
           time="10:00"
         />
-        <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden`}>
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th className="py-2">{users[0].username}</th>
-                <th>{users[1].username}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {moveList.map((row, j) =>
-                <tr key={j} className={`w-full ${j % 2 === 0 ? 'bg-[rgba(0,0,0,0.3)]' : ''}`}>
-                  <td className="text-center py-1">{j + 1}.</td>
-                  <td className="text-center font-medium">{row[0]}</td>
-                  <td className="text-center font-medium">{row[1]}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+        <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md`}>
+            <MoveList {...{ moveList, users }} />
         </div>
         <UserDisplay
           user={users[0]}
