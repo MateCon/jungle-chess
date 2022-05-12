@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { GameUser } from "../../types/game";
 
 interface Props {
@@ -7,6 +7,12 @@ interface Props {
 };
 
 const MoveList: FC<Props> = ({ users, moveList }) => {
+    const endRef = useRef<any>(null);
+
+    useEffect(() => {
+        endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [moveList]);
+
     return (
         <table className="w-full">
         <thead>
@@ -22,6 +28,7 @@ const MoveList: FC<Props> = ({ users, moveList }) => {
               <td className="text-center py-1">{j + 1}.</td>
               <td className="text-center font-medium">{row[0]}</td>
               <td className="text-center font-medium">{row[1]}</td>
+              <div ref={endRef} />
             </tr>
           )}
         </tbody>

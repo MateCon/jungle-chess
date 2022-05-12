@@ -80,6 +80,7 @@ const Game: FC<Props> = ({
     if (onMove) onMove(move, position);
     return true;
   }
+  console.log(cellSize * gameObjects.length)
 
   return (
     <div className="flex flex-row">
@@ -133,14 +134,14 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      <div className={`flex flex-col ml-8`}>
+      <div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
         <UserDisplay
           user={users[1]}
           turn={turn}
           time="10:00"
         />
-        <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md`}>
-            <MoveList {...{ moveList, users }} />
+        <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md overflow-y-scroll`}>
+          <MoveList {...{ moveList, users }} />
         </div>
         <UserDisplay
           user={users[0]}
@@ -153,3 +154,4 @@ const Game: FC<Props> = ({
 };
 
 export default Game;
+// h-[666px]
