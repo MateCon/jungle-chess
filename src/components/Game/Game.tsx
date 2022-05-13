@@ -37,6 +37,7 @@ const Game: FC<Props> = ({
   const [turn, setTurn] = useState<Turn>("B");
   const [moveList, setMoveList] = useState<string[][]>([]);
   const [showEndModal, setShowEndModal] = useState<boolean>(false);
+  const [winner, setWinner] = useState<string | undefined>(undefined);
 
   const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
 
@@ -61,8 +62,10 @@ const Game: FC<Props> = ({
       .map(key => endSquares[key]);
 
     for (let endSquare of otherEndSquares)
-      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
+      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1]) {
         setShowEndModal(true);
+        setWinner(users.filter(user => user.turn === turn)[0]?.username);
+      }
 
     setState(newState);
     setPieces(newPieces);
@@ -151,7 +154,7 @@ const Game: FC<Props> = ({
         />
       </div>
       <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
-        Hello
+        <p>{winner} won!</p>
       </Modal>
     </div >
   )
