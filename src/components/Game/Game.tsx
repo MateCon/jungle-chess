@@ -2,6 +2,7 @@ import { FC, ReactNode, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
+import Modal from "../Modal";
 import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
 import MoveList from "./MoveList";
@@ -35,6 +36,7 @@ const Game: FC<Props> = ({
   const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
   const [turn, setTurn] = useState<Turn>("B");
   const [moveList, setMoveList] = useState<string[][]>([]);
+  const [showEndModal, setShowEndModal] = useState<boolean>(false);
 
   const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
 
@@ -60,7 +62,7 @@ const Game: FC<Props> = ({
 
     for (let endSquare of otherEndSquares)
       if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
-        console.log("GAME HAS ENDED");
+        setShowEndModal(true);
 
     setState(newState);
     setPieces(newPieces);
@@ -80,7 +82,6 @@ const Game: FC<Props> = ({
     if (onMove) onMove(move, position);
     return true;
   }
-  console.log(cellSize * gameObjects.length)
 
   return (
     <div className="flex flex-row">
@@ -149,6 +150,9 @@ const Game: FC<Props> = ({
           time="10:00"
         />
       </div>
+      <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
+        Hello
+      </Modal>
     </div >
   )
 };
