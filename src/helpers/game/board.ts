@@ -17,10 +17,11 @@ export const isInBounds = (
 export const diffToDirection = (
 	diff: [number, number]
 ): MoveDirection | undefined => {
-	if (diff[0] === 0 && diff[1] > 0) return MoveDirection.Up;
-	if (diff[0] === 0 && diff[1] < 0) return MoveDirection.Down;
-	if (diff[0] > 0 && diff[1] === 0) return MoveDirection.Right;
-	if (diff[0] < 0 && diff[1] === 0) return MoveDirection.Left;
+	console.log(diff);
+	if (diff[0] === 0 && diff[1] > 0 && diff[1] <= 1) return MoveDirection.Up;
+	if (diff[0] === 0 && diff[1] < 0 && diff[1] >= -1) return MoveDirection.Down;
+	if (diff[0] > 0 && diff[0] <= 1 && diff[1] === 0) return MoveDirection.Right;
+	if (diff[0] < 0 && diff[0] >= -1 && diff[1] === 0) return MoveDirection.Left;
 	return undefined;
 };
 

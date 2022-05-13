@@ -161,4 +161,3 @@ const Game: FC<Props> = ({
 };
 
 export default Game;
-// h-[666px]

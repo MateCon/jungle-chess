@@ -61,7 +61,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
             onDragEnd([diffX, diffY]);
         }}
     >
-        <div className={`relative w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
+        <div className={`select-none relative w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden scale-75`}>
             <Image
                 src={`/static/assets/pieces/${piece}.png`}
                 alt="piece"
