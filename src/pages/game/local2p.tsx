@@ -26,6 +26,7 @@ const Local2P: NextPage = () => {
       <div className='w-screen h-fit min-h-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
         <div className='grid w-full h-screen place-items-center shadow-xl'>
           <Game
+            showSideBar={true}
             cellSize={CELL_SIZE}
             {...initialState}
             users={[
