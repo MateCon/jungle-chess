@@ -35,6 +35,12 @@ export const getMove = (
 		newPosition = [position[0] + diff[0], position[1] + diff[1]];
 	}
 
+	if(
+		gameObjects[position[1]][position[0]] === GameObject.Water &&
+		gameObjects[newPosition[1]][newPosition[0]] === GameObject.Land &&
+		state[newPosition[1]][newPosition[0]] !== Piece.Empty
+	) return null;
+
 	if (!isInBounds(newPosition[0], newPosition[1], width, height)) return null;
 	if (endSquare[0] === newPosition[0] && endSquare[1] === newPosition[1])
 		return null;
