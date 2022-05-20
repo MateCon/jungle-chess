@@ -82,7 +82,7 @@ const Game: FC<Props> = ({
   }
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col lg:flex-row">
       <div className='relative'>
         <div className="grid grid-cols-7 w-fit">
           {gameObjects.map((row, y) => row.map((object, x) =>

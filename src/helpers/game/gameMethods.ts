@@ -22,7 +22,6 @@ export const getMove = (
 	const diff = directionToDiff(direction);
 	let newPosition: [number, number] = [-1, -1];
 
-	console.log(position, diff, gameObjects[position[1]][position[0]], state[position[1] + diff[1]][position[0] + diff[0]]);
 	if (
 		gameObjects[position[1]][position[0]] === GameObject.Water &&
 		state[position[1] + diff[1]][position[0] + diff[0]] !== Piece.Empty
