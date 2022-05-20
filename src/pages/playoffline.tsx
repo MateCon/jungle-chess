@@ -29,13 +29,15 @@ const Home: NextPage = () => {
               ]}
             />
             <div className="flex flex-col justify-center items-center ml-16 box-content bg-background-700 w-[400px]">
-            <Link href={"/playonline"}>
-            <button type="button" className="bg-primary-600 hover:bg-primary-500 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Online</button>
-            </Link>
+            <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">1v1 Multiplayer</button>
             <div className="mt-16">
-            <Link href={"/playoffline"}>
-            <button type="button" className="bg-error-700 hover:bg-error-500 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Offline</button>
-            </Link>
+            <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">1v1 Bot</button>
+            <div className="mt-16">
+            <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Tutorial</button>
+            <div className="mt-16">
+            <button type="button" className="bg-primary-600 hover:bg-primary-500 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Play</button>
+            </div>
+            </div>
             </div>
             </div>
           </main>
