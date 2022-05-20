@@ -80,7 +80,6 @@ const Game: FC<Props> = ({
     if (onMove) onMove(move, position);
     return true;
   }
-  console.log(cellSize * gameObjects.length)
 
   return (
     <div className="flex flex-row">
