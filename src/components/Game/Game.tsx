@@ -98,13 +98,12 @@ const Game: FC<Props> = ({
     <div className="flex flex-col lg:flex-row">
       <div className='relative'>
         <div className="grid grid-cols-7 w-fit">
-          {gameObjects.map((row, y) => row.map((object, x) =>
-            <GameSquare
+          {gameObjects.map((row, y) => row.map((object, x) => {
+            const tl = x === 0 ? (y + 1).toString() : undefined;
+            const br = y === gameObjects.length - 1 ? String.fromCharCode(x + 65) : undefined;
+            return <GameSquare
               key={`${x}-${y}`}
-              object={object}
-              x={x}
-              y={y}
-              cellSize={cellSize}
+              {...{ object, x, y, cellSize, tl, br }}
               isActive={active.filter((el) => el[0] === x && el[1] === y).length > 0}
               isPossibleMove={possibleMoves.filter((el) => el[0] === x && el[1] === y).length > 0}
               onClick={(canMove: boolean) => {
@@ -119,6 +118,7 @@ const Game: FC<Props> = ({
                 return movePiece(`${name}${direction}`, selectedPiece!);
               }}
             />
+            }
           ))}
         </div>
         {pieces.map(({ team, name, position: [x, y] }) =>
