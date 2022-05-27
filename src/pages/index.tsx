@@ -141,9 +141,9 @@ const Home: NextPage = () => {
             </div>
 
             <div className="pb-8">
-              <h2
+              <h1
                 className="text-5xl text-center text-white pt-24 pb-6 font-bold"
-              >And</h2>
+              >And</h1>
               <h1
                 className="text-5xl font-bold text-center"
               >

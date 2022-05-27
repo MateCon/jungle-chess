@@ -35,7 +35,9 @@ const Home: NextPage = () => {
             <div className="mt-16">
             <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Friends</button>
             <div className="mt-16">
-            <button type="button" className="bg-primary-600 hover:bg-primary-500 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Play</button>
+            <Link href={"/play"}>
+            <button type="button" className="bg-error-700 hover:bg-error-900 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Go back</button>
+            </Link>
             </div>
             </div>
             </div>

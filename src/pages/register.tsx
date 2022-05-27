@@ -16,7 +16,7 @@ const Home: NextPage = () => {
                 <span className="text-primary-600">Jungle</span>
                 <span className="text-white">Chess</span>
               </h1>
-            <div className="flex flex-col justify-center items-center ml-16 box-content bg-background-700 h-[800px] w-[500px] mb-10">
+            <div className="flex flex-col justify-center items-center box-content bg-background-700 h-[600px] w-[400px] ml-16 mb-10">
             <h1
               className="text-2xl font-semibold text-center mb-10"
               >
@@ -31,9 +31,9 @@ const Home: NextPage = () => {
             <input type="password" placeholder="Repeat Password" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
             <input type="number" placeholder="Age" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
 
-            <p className="pb-10 justify-center item-center">
+            <p className="pb-10">
               <label htmlFor="hola"></label>
-              <select name="hola" id="hola" placeholder="Jungle Chess Level">
+              <select name="hola" id="hola">
                 <option value="basic">Basic</option>
                 <option value="basic">Advanced</option>
                 <option value="basic">Professional</option>
