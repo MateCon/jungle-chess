@@ -68,25 +68,33 @@ const useTimers = (
 	};
 
 	const resume = (index: number) => {
-		setTimers([
-			...timers.slice(0, index),
-			{ ...timers[0], isRunning: true },
-			...timers.slice(index + 1)
+		setTimers(prev => [
+			...prev.slice(0, index),
+			{ ...prev[index], isRunning: true },
+			...prev.slice(index + 1)
 		]);
 	}
 
 	const stop = (index: number) => {
-		setTimers([
-			...timers.slice(0, index),
-			{ ...timers[0], isRunning: false },
-			...timers.slice(index + 1)
+		setTimers(prev => [
+			...prev.slice(0, index),
+			{ ...prev[index], isRunning: false },
+			...prev.slice(index + 1)
+		]);
+	}
+
+	const resumeAndStopOthers = (index: number) => {
+		setTimers(prev => [
+			...prev.slice(0, index).map(t => ({ ...t, isRunning: false })),
+			{ ...prev[index], isRunning: true },
+			...prev.slice(index + 1).map(t => ({ ...t, isRunning: false }))
 		]);
 	}
 
 	const restart = (index: number) => {
 		setTimers([
 			...timers.slice(0, index),
-			{ ...timers[0], time: 0 },
+			{ ...timers[index], time: 0 },
 			...timers.slice(index + 1)
 		]);
 	}
@@ -107,13 +115,12 @@ const useTimers = (
 		return () => clearInterval(interval);
 	}, [timers, setTimers, tickRate]);
 
-	useEffect(() => console.log(timers[0].isRunning), [timers])
-
 	return {
 		timers,
 		getTime,
 		getTimeFormatted,
 		resume,
+		resumeAndStopOthers,
 		stop,
 		restart,
 	};

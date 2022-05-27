@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useCallback, useEffect, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
@@ -38,7 +38,14 @@ const Game: FC<Props> = ({
   const [moveList, setMoveList] = useState<string[][]>([]);
   const timers = useTimers(2, false, 1000 * 60 * 10);
 
-  const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
+  const toggleTurn = () => {
+    setTurn(turn === "B" ? "R" : "B");
+    updateTimer(turn);
+  };
+
+  const updateTimer = useCallback((t?: Turn) => {
+    timers.resumeAndStopOthers(t === "B" ? 1 : 0);
+  }, [timers]);
 
   const movePiece = (move: string, position: [number, number]): boolean => {
     if (state[position[1]][position[0]][0] !== turn) return false;
@@ -84,8 +91,7 @@ const Game: FC<Props> = ({
   }
 
   useEffect(() => {
-    console.log("-------------");
-    timers.resume(0);
+    updateTimer();
   }, []);
 
   return (
@@ -144,7 +150,7 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[1]}
           turn={turn}
-          time={timers.getTimeFormatted(0, 2)}
+          time={timers.getTimeFormatted(1, 2)}
         />
         <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md overflow-y-scroll`}>
           <MoveList {...{ moveList, users }} />
@@ -152,7 +158,7 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[0]}
           turn={turn}
-          time={timers.getTimeFormatted(1, 2)}
+          time={timers.getTimeFormatted(0, 2)}
         />
       </div>
     </div >
