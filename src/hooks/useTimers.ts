@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 
-const useTimer = (
+interface Timer {
+	time: number;
+	isRunning: boolean;
+}
+
+const createTimer = (startingTime: number) => ({ time: startingTime, isRunning: false });
+
+const createTimers = (count: number, startingTime: number) => Array(count).fill(createTimer(startingTime));
+
+const useTimers = (
+	count: number,
 	tickRate: number = 1000,
 	countUp: boolean = true,
 	startingTime: number = 0
 ) => {
-	const [time, setTime] = useState<number>(startingTime);
-	const [isRunning, setIsRunning] = useState<boolean>(false);
+	const [timers, setTimers] = useState<Timer[]>(() => createTimers(count, startingTime));
 
-	const getTime = () => {
-		let milliseconds = time,
+	const getTime = (index: number) => {
+		let milliseconds = timers[index].time,
 			seconds = 0,
 			minutes = 0,
 			hours = 0;
@@ -37,14 +46,14 @@ const useTimer = (
 		};
 	};
 
-	const getTimeFormatted = (precesion: number): string => {
+	const getTimeFormatted = (index: number, precesion: number): string => {
 		const format = (n: number, digits: number) => {
 			let str = String(n);
 			while (str.length < digits) str = "0" + str;
 			return str;
 		};
 
-		const { hours, minutes, seconds, milliseconds } = getTime();
+		const { hours, minutes, seconds, milliseconds } = getTime(index);
 		let string = `
       ${format(hours, 2)}:${format(minutes, 2)}:${format(seconds, 2)}`;
 
@@ -58,30 +67,50 @@ const useTimer = (
 		return string;
 	};
 
-	const resume = () => setIsRunning(true);
-	const stop = () => setIsRunning(false);
-	const restart = () => setTime(0);
+	const resume = (index: number) => {
+		const copy = [...timers];
+		copy[index].isRunning = true;
+		setTimers(copy);
+	}
+
+	const stop = (index: number) => {
+		const copy = [...timers];
+		copy[index].isRunning = false;
+		setTimers(copy);
+	}
+
+	const restart = (index: number) => {
+		const copy = [...timers];
+		copy[index].time = 0;
+		setTimers(copy);
+	}
 
 	useEffect(() => {
 		let prev = Date.now();
 
 		const interval = setInterval(() => {
 			const delta = Date.now() - prev;
-			if (isRunning) setTime((time) => time + delta * (countUp ? 1 : -1));
+			setTimers(prev => prev.map(timer => timer.isRunning 
+				? {
+					isRunning: true,
+					time: timer.time + delta * (countUp ? 1 : -1)
+				}
+				: timer
+			));
 			prev = Date.now();
 		}, tickRate);
 
 		return () => clearInterval(interval);
-	}, [setTime, tickRate, isRunning]);
+	}, [setTimers, tickRate]);
 
 	return {
-		...getTime(),
+		timers,
+		getTime,
 		getTimeFormatted,
-		isRunning,
 		resume,
 		stop,
 		restart,
 	};
 };
 
-export default useTimer;
+export default useTimers;
