@@ -11,9 +11,9 @@ const createTimers = (count: number, startingTime: number) => Array(count).fill(
 
 const useTimers = (
 	count: number,
-	tickRate: number = 1000,
 	countUp: boolean = true,
-	startingTime: number = 0
+	startingTime: number = 0,
+	tickRate: number = 1000
 ) => {
 	const [timers, setTimers] = useState<Timer[]>(() => createTimers(count, startingTime));
 
@@ -54,35 +54,41 @@ const useTimers = (
 		};
 
 		const { hours, minutes, seconds, milliseconds } = getTime(index);
-		let string = `
-      ${format(hours, 2)}:${format(minutes, 2)}:${format(seconds, 2)}`;
+		// let string = `${format(hours, 2)}:${format(minutes, 2)}:${format(seconds, 2)}`;
+		let string = `${format(minutes, 2)}:${format(seconds, 2)}`;
 
-		if (precesion > 0 || precesion < 4)
-			string +=
-				"." +
-				format(
-					Math.floor(milliseconds / Math.pow(10, 3 - precesion)),
-					precesion
-				);
+		// if (precesion > 0 || precesion < 4)
+		// 	string +=
+		// 		"." +
+		// 		format(
+		// 			Math.floor(milliseconds / Math.pow(10, 3 - precesion)),
+		// 			precesion
+		// 		);
 		return string;
 	};
 
 	const resume = (index: number) => {
-		const copy = [...timers];
-		copy[index].isRunning = true;
-		setTimers(copy);
+		setTimers([
+			...timers.slice(0, index),
+			{ ...timers[0], isRunning: true },
+			...timers.slice(index + 1)
+		]);
 	}
 
 	const stop = (index: number) => {
-		const copy = [...timers];
-		copy[index].isRunning = false;
-		setTimers(copy);
+		setTimers([
+			...timers.slice(0, index),
+			{ ...timers[0], isRunning: false },
+			...timers.slice(index + 1)
+		]);
 	}
 
 	const restart = (index: number) => {
-		const copy = [...timers];
-		copy[index].time = 0;
-		setTimers(copy);
+		setTimers([
+			...timers.slice(0, index),
+			{ ...timers[0], time: 0 },
+			...timers.slice(index + 1)
+		]);
 	}
 
 	useEffect(() => {
@@ -90,18 +96,18 @@ const useTimers = (
 
 		const interval = setInterval(() => {
 			const delta = Date.now() - prev;
-			setTimers(prev => prev.map(timer => timer.isRunning 
-				? {
-					isRunning: true,
-					time: timer.time + delta * (countUp ? 1 : -1)
-				}
-				: timer
+			const newTimers = [...timers];
+			setTimers(newTimers.map(({ time, isRunning }) => isRunning
+				? { time: time + delta * (countUp ? 1 : -1), isRunning }
+				: { time, isRunning }
 			));
 			prev = Date.now();
 		}, tickRate);
 
 		return () => clearInterval(interval);
-	}, [setTimers, tickRate]);
+	}, [timers, setTimers, tickRate]);
+
+	useEffect(() => console.log(timers[0].isRunning), [timers])
 
 	return {
 		timers,

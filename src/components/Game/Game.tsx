@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
@@ -6,6 +6,7 @@ import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
 import MoveList from "./MoveList";
 import UserDisplay from "./UserDisplay";
+import useTimers from "../../hooks/useTimers";
 
 interface Props {
   cellSize: number;
@@ -35,6 +36,7 @@ const Game: FC<Props> = ({
   const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
   const [turn, setTurn] = useState<Turn>("B");
   const [moveList, setMoveList] = useState<string[][]>([]);
+  const timers = useTimers(2, false, 1000 * 60 * 10);
 
   const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
 
@@ -80,6 +82,11 @@ const Game: FC<Props> = ({
     if (onMove) onMove(move, position);
     return true;
   }
+
+  useEffect(() => {
+    console.log("-------------");
+    timers.resume(0);
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -137,7 +144,7 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[1]}
           turn={turn}
-          time="10:00"
+          time={timers.getTimeFormatted(0, 2)}
         />
         <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md overflow-y-scroll`}>
           <MoveList {...{ moveList, users }} />
@@ -145,7 +152,7 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[0]}
           turn={turn}
-          time="10:00"
+          time={timers.getTimeFormatted(1, 2)}
         />
       </div>
     </div >
