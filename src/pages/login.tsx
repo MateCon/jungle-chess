@@ -22,22 +22,26 @@ const Home: NextPage = () => {
               >
                 <span className="text-white">Log in</span>
             </h1>
+
+            <input type="email" placeholder="Email" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+            <input type="password" placeholder="Password" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+
             <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full mr-4 text-2xl h-12 w-48">Submit</button>
             <h1
               className="text-xl font-semibold text-center mt-10 mb-10"
               >
                 <span className="text-white">or connect with</span>
             </h1>
-            <button type="button" className="bg-primary-600 hover:bg-primary-500 transition text-background-900 font-bold mr-4 text-2xl h-16 w-48">Google</button>
+            <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold mr-4 text-2xl h-16 w-48">Google</button>
             <div className="mt-10">
-            <button type="button" className="bg-error-700 hover:bg-error-500 transition text-background-900 font-bold mr-4 text-2xl h-16 w-48">Facebook</button>
+            <button type="button" className="bg-secondary-600 hover:bg-secondary-500 transition text-background-900 font-bold mr-4 text-2xl h-16 w-48">Facebook</button>
             </div>
             <h1
-              className="text-xl font-normal text-center mt-10 mb-10"
+              className="text-xl font-normal text-center mt-10 mb-8"
               >
                 <span className="text-white mr-2">New?</span>
                 <Link href={"/register"}>
-                <span className="text-link-100">Sign Up</span>
+                <span className="text-link-100 underline text-secondary-600 hover:text-secondary-500">Sign Up</span>
                 </Link>
             </h1>
             </div>

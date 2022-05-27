@@ -9,10 +9,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Navbar />
-      <div className="columns-1 w-16 md:w-32 lg:w-48">
         <div className='w-screen h-fit min-h-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
           <main className="w-full min-h-screen">
-            <div className='flex flex-col md:flex-row justify-center items-center pt-10'>
+            <div className='flex flex-col md:flex-row justify-center items-center pt-10 pl-10'>
               <Game
                 showSideBar={false}
                 cellSize={74}
@@ -57,7 +56,7 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row place-content-center pt-20">
+            <div className="flex flex-col md:flex-row place-content-center pt-20 pl-10">
               <div className="columns-1 mr-16">
                 <h2
                   className="text-5xl text-center text-white pt-24 pb-6 font-bold"
@@ -78,7 +77,7 @@ const Home: NextPage = () => {
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row justify-center items-center pt-10">
+              <div className="flex flex-col md:flex-row justify-center items-center pt-20">
               <Game
                 showSideBar={false}
                 cellSize={74}
@@ -99,7 +98,8 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row place-content-center pt-20">
+            <div className="flex flex-col md:flex-row place-content-center pt-20 pl-10">
+        
               <div className="hidden md:block">
                 <Game
                   showSideBar={false}
@@ -154,7 +154,6 @@ const Home: NextPage = () => {
           </main>
           <Footer />
         </div>
-      </div>
     </>
   )
 }

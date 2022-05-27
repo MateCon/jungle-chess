@@ -11,24 +11,43 @@ const Home: NextPage = () => {
           <main className="w-full min-h-screen pt-10 place-content-center flex flex-row">
              <div className="columns-1 ml-16">
              <h1
-                className="text-4xl font-semibold text-center"
+                className="text-4xl font-semibold text-center mb-10"
               >
                 <span className="text-primary-600">Jungle</span>
                 <span className="text-white">Chess</span>
               </h1>
-            <div className="flex flex-col justify-center items-center ml-16 box-content bg-background-700 h-[800px] w-[500px]">
+            <div className="flex flex-col justify-center items-center ml-16 box-content bg-background-700 h-[800px] w-[500px] mb-10">
             <h1
-              className="text-2xl font-semibold text-center mt-10 mb-10"
+              className="text-2xl font-semibold text-center mb-10"
               >
                 <span className="text-white">Sign up</span>
             </h1>
-            <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full mr-4 text-2xl h-12 w-48 mb-10">Submit</button>
+
+          
+
+            <input type="text" placeholder="Username" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+            <input type="email" placeholder="Email" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+            <input type="password" placeholder="Password" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+            <input type="password" placeholder="Repeat Password" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+            <input type="number" placeholder="Age" className="text-center text-white bg-background-700 border-b-4 border-white" required></input><br/>
+
+            <p className="pb-10 justify-center item-center">
+              <label htmlFor="hola"></label>
+              <select name="hola" id="hola" placeholder="Jungle Chess Level">
+                <option value="basic">Basic</option>
+                <option value="basic">Advanced</option>
+                <option value="basic">Professional</option>
+              </select>
+            </p>
+
+
+            <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full mr-4 text-2xl h-12 w-48 mb-8">Submit</button>
             <h1
               className="text-xl font-normal text-center mt-10 mb-10"
               >
                 <span className="text-white mr-2">Already have an account?</span>
                 <Link href={"/login"}>
-                <span className="text-link-100">Log in</span>
+                <span className="text-link-100 underline text-secondary-600 hover:text-secondary-500">Log in</span>
                 </Link>
             </h1>
             </div>

@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       <>
         <Navbar />
         <div className='w-screen h-fit min-h-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
-          <main className="w-full min-h-screen flex flex-row place-content-center pt-10">
+          <main className="w-full min-h-screen flex flex-row place-content-center pt-10 mb-10">
           <Game
               showSideBar={false}
               cellSize={74}
