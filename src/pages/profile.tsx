@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
                 <div className="flex flex-col md:flex-col">                
                 
-                <div className="flex flex-col box-content bg-background-700 h-[300px] w-[900px] mr-10 mb-10">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10 mb-10">
                     <h1
                     className="text-4xl font-semibold ml-4 mt-4"
                     >
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
                     <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold text-2xl h-12 w-48 ml-4 mt-32">Add friend</button>
                 </div>
 
-                <div className="flex flex-col box-content bg-background-700 h-[300px] w-[900px] mr-10">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10">
                     <h1
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
 
                 </div>
 
-                <div className="flex flex-col box-content bg-background-700 h-[640px] w-[300px]">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[640px] w-[300px]">
                     <h1
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
 
                 <div className="flex flex-col md:flex-col">                
                 
-                <div className="flex flex-col box-content bg-background-700 h-[300px] w-[900px] mr-10 mb-10">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10 mb-10">
                     <h1
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
@@ -62,12 +62,12 @@ const Home: NextPage = () => {
                     </h1>
                 </div>
 
-                <div className="flex flex-col box-content bg-background-700 h-[300px] w-[900px] mr-10">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10">
                 </div>
 
                 </div>
 
-                <div className="flex flex-col box-content bg-background-700 h-[640px] w-[300px]">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[640px] w-[300px]">
                     <h1
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
