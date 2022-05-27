@@ -2,6 +2,7 @@ import { FC, ReactNode, useCallback, useEffect, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
+import Modal from "../Modal";
 import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
 import MoveList from "./MoveList";
@@ -37,6 +38,8 @@ const Game: FC<Props> = ({
   const [turn, setTurn] = useState<Turn>("B");
   const [moveList, setMoveList] = useState<string[][]>([]);
   const timers = useTimers(2, false, 1000 * 60 * 10);
+  const [showEndModal, setShowEndModal] = useState<boolean>(false);
+  const [winner, setWinner] = useState<string | undefined>(undefined);
 
   const toggleTurn = () => {
     setTurn(turn === "B" ? "R" : "B");
@@ -68,8 +71,10 @@ const Game: FC<Props> = ({
       .map(key => endSquares[key]);
 
     for (let endSquare of otherEndSquares)
-      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
-        console.log("GAME HAS ENDED");
+      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1]) {
+        setShowEndModal(true);
+        setWinner(users.filter(user => user.turn === turn)[0]?.username);
+      }
 
     setState(newState);
     setPieces(newPieces);
@@ -161,6 +166,9 @@ const Game: FC<Props> = ({
           time={timers.getTimeFormatted(0, 2)}
         />
       </div>
+      <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
+        <p>{winner} won!</p>
+      </Modal>
     </div >
   )
 };
