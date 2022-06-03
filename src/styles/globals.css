@@ -33,6 +33,16 @@
 			top-24 md:left-32 md:top-5 rounded-md shadow-md text-white bg-neutral-700 
             text-sm font-bold transition-all duration-100 scale-0 origin-left;
 	}
+
+	.card {
+		color: rgb(255, 255, 255);
+  		text-decoration: none;
+  		background-color: #fa320a;
+  		border: 3px #fa320a solid;
+  		font-weight: bold;
+  		cursor: pointer;
+  		transition: 0.5s;
+	}
 }
 
 @tailwind utilities;

@@ -16,6 +16,7 @@ interface Props {
   gameObjects: GameObject[][];
   endSquares: { [key: string]: [number, number] },
   users: GameUser[];
+  showSideBar: boolean;
   onMove?: (move: string, position: [number, number]) => void;
   createMoveListener?: (move: (move: string, position: [number, number]) => void) => ReactNode;
 }
@@ -28,7 +29,8 @@ const Game: FC<Props> = ({
   onMove,
   createMoveListener,
   users,
-  endSquares
+  endSquares,
+  showSideBar
 }) => {
   const [state, setState] = useState(boardState);
   const [pieces, setPieces] = useState<PieceData[]>(startingPieces);
@@ -151,7 +153,7 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      <div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
+      {showSideBar && <div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
         <UserDisplay
           user={users[1]}
           turn={turn}
