@@ -4,16 +4,18 @@ import Image from "next/image";
 import { isEvenInMatrix } from "../../helpers/math";
 
 interface Props {
-  object: GameObject,
-  x: number,
-  y: number,
-  isActive: boolean,
-  isPossibleMove: boolean,
-  onClick: (isActive: boolean) => void,
-  cellSize: number
+  object: GameObject;
+  x: number;
+  y: number;
+  isActive: boolean;
+  isPossibleMove: boolean;
+  onClick: (isActive: boolean) => void;
+  cellSize: number;
+  tl: string | undefined;
+  br: string | undefined;
 }
 
-const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick, cellSize }) => {
+const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick, cellSize, tl, br }) => {
   const [isLight] = useState(() => isEvenInMatrix(x, y));
 
   const color = useMemo(() => {
@@ -30,6 +32,14 @@ const GameSquare: FC<Props> = ({ object, x, y, isActive, isPossibleMove, onClick
         onClick(isPossibleMove)
       }}
     >
+        {tl && <span
+          className="absolute text-white font-semibold"
+          style={{transform: `translate(-${cellSize / 2 - 10}px, -${cellSize / 2 - 14}px)`}}
+        >{tl}</span>}
+        {br && <span
+          className="absolute text-white font-semibold"
+          style={{transform: `translate(${cellSize / 2 - 10}px, ${cellSize / 2 - 12}px)`}}
+        >{br}</span>}
       {isActive && <div className={`absolute bg-[rgba(255,255,0,0.3)] w-[${cellSize}px] h-[${cellSize}px]`} />}
       {isPossibleMove && (
         <div className={`absolute bg-[rgba(0,0,0,0)] w-[${cellSize}px] h-[${cellSize}px] z-20 grid place-items-center`}>

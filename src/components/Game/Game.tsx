@@ -1,11 +1,13 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useCallback, useEffect, useState } from "react";
 import { diffToDirection, directionToDiff } from "../../helpers/game/board";
 import { getPossibleMoves, movePiece as movePieceMethod } from '../../helpers/game/gameMethods';
 import { GameObject, GameUser, MoveDirection, PieceData, Turn } from "../../types/game";
+import Modal from "../Modal";
 import GamePiece from "./GamePiece";
 import GameSquare from "./GameSquare";
 import MoveList from "./MoveList";
 import UserDisplay from "./UserDisplay";
+import useTimers from "../../hooks/useTimers";
 
 interface Props {
   cellSize: number;
@@ -37,8 +39,18 @@ const Game: FC<Props> = ({
   const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
   const [turn, setTurn] = useState<Turn>("B");
   const [moveList, setMoveList] = useState<string[][]>([]);
+  const timers = useTimers(2, false, 1000 * 60 * 10);
+  const [showEndModal, setShowEndModal] = useState<boolean>(false);
+  const [winner, setWinner] = useState<string | undefined>(undefined);
 
-  const toggleTurn = () => setTurn(turn === "B" ? "R" : "B");
+  const toggleTurn = () => {
+    setTurn(turn === "B" ? "R" : "B");
+    updateTimer(turn);
+  };
+
+  const updateTimer = useCallback((t?: Turn) => {
+    timers.resumeAndStopOthers(t === "B" ? 1 : 0);
+  }, [timers]);
 
   const movePiece = (move: string, position: [number, number]): boolean => {
     if (state[position[1]][position[0]][0] !== turn) return false;
@@ -61,8 +73,10 @@ const Game: FC<Props> = ({
       .map(key => endSquares[key]);
 
     for (let endSquare of otherEndSquares)
-      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1])
-        console.log("GAME HAS ENDED");
+      if (position[0] + diff[0] === endSquare[0] && position[1] + diff[1] === endSquare[1]) {
+        setShowEndModal(true);
+        setWinner(users.filter(user => user.turn === turn)[0]?.username);
+      }
 
     setState(newState);
     setPieces(newPieces);
@@ -82,19 +96,21 @@ const Game: FC<Props> = ({
     if (onMove) onMove(move, position);
     return true;
   }
-  console.log(cellSize * gameObjects.length)
+
+  useEffect(() => {
+    updateTimer();
+  }, []);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col lg:flex-row">
       <div className='relative'>
         <div className="grid grid-cols-7 w-fit">
-          {gameObjects.map((row, y) => row.map((object, x) =>
-            <GameSquare
+          {gameObjects.map((row, y) => row.map((object, x) => {
+            const tl = x === 0 ? (y + 1).toString() : undefined;
+            const br = y === gameObjects.length - 1 ? String.fromCharCode(x + 65) : undefined;
+            return <GameSquare
               key={`${x}-${y}`}
-              object={object}
-              x={x}
-              y={y}
-              cellSize={cellSize}
+              {...{ object, x, y, cellSize, tl, br }}
               isActive={active.filter((el) => el[0] === x && el[1] === y).length > 0}
               isPossibleMove={possibleMoves.filter((el) => el[0] === x && el[1] === y).length > 0}
               onClick={(canMove: boolean) => {
@@ -109,6 +125,7 @@ const Game: FC<Props> = ({
                 return movePiece(`${name}${direction}`, selectedPiece!);
               }}
             />
+            }
           ))}
         </div>
         {pieces.map(({ team, name, position: [x, y] }) =>
@@ -140,7 +157,7 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[1]}
           turn={turn}
-          time="10:00"
+          time={timers.getTimeFormatted(1, 2)}
         />
         <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md overflow-y-scroll`}>
           <MoveList {...{ moveList, users }} />
@@ -148,9 +165,12 @@ const Game: FC<Props> = ({
         <UserDisplay
           user={users[0]}
           turn={turn}
-          time="10:00"
+          time={timers.getTimeFormatted(0, 2)}
         />
-      </div>}
+      </div>
+      <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
+        <p>{winner} won!</p>
+      </Modal>
     </div >
   )
 };
