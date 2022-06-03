@@ -167,7 +167,7 @@ const Game: FC<Props> = ({
           turn={turn}
           time={timers.getTimeFormatted(0, 2)}
         />
-      </div>
+      </div>}
       <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
         <p>{winner} won!</p>
       </Modal>
