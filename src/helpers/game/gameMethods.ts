@@ -22,6 +22,11 @@ export const getMove = (
 	const diff = directionToDiff(direction);
 	let newPosition: [number, number] = [-1, -1];
 
+	if (
+		gameObjects[position[1]][position[0]] === GameObject.Water &&
+		state[position[1] + diff[1]][position[0] + diff[0]] !== Piece.Empty
+	) return null;
+
 	if (piece[1] === Piece.Tiger || piece[1] === Piece.Lion) {
 		let curr = [position[0] + diff[0], position[1] + diff[1]];
 		while (

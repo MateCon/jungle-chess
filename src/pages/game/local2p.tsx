@@ -23,7 +23,7 @@ const Local2P: NextPage = () => {
         <title>Jungle Chess</title>
       </Head>
       <Navbar />
-      <div className='w-screen h-fit min-h-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
+      <div className='w-screen  bg-background-900 pt-20 md:pt-0 md:pl-20'>
         <div className='grid w-full h-screen place-items-center shadow-xl'>
           <Game
             cellSize={CELL_SIZE}
