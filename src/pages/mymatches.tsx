@@ -21,57 +21,68 @@ const Home: NextPage = () => {
                 <span className="text-white">My Matches</span>
                 </h1>               
                 
-                <div className="container">
-                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[600px] w-[1200px] mr-10 mb-10">
-                <table className="table-auto">
-                <thead className="text-white text-2xl font-semibold bg-background-800">
-                <tr>
-                <th></th>
-                <th>Players</th>
-                <th>Accuracy</th>
-                <th>Turns</th>
-                <th>Rating</th>
-                </tr>
-                </thead>
-                <tbody className="text-white xl font-normal">
-                <tr className="border-b-4 border-background-800">
-                <td className="font-semibold">Ranked</td>
-                <div className="flex flex-row">
-                <div className="flex flex-col">
-                <td>TochuGV</td>
-                <td>MateCon</td>
-                </div>
-                <div className="flex flex-col">
-                <td>89.5%</td>
-                <td>90.6%</td>
-                </div>
-                <td>46</td>
-                <div className="flex flex-col">
-                <td>1380</td>
-                <td>1501</td>
-                </div>
-                </div>
-                </tr>
-                <tr className="border-b-4 border-background-800">
-                <td className="font-semibold">Unranked</td>
-                <td>MateCon</td>
-                <td>90%</td>
-                <td>52</td>
-                <td>1414</td>
-                </tr>
-                <tr className="border-b-4 border-background-800">
-                <td className="font-semibold">Friendly</td>
-                <td>Faustito</td>
-                <td>84.5%</td>
-                <td>46</td>
-                <td>1389</td>
-                </tr>
-                </tbody>
-                </table>
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[600px] w-[1200px]">
+
+  <div className="table w-full">
+  
+  <div className="table-header-group text-white text-2xl font-semibold bg-background-800">
+    
+    <div className="table-row">
+      <div className="table-cell text-center">Mode</div>
+      <div className="table-cell text-center">Players</div>
+      <div className="table-cell text-center">Accuracy</div>
+      <div className="table-cell text-center">Turns</div>
+      <div className="table-cell text-center">Rating</div>
+    </div>
+  
+  </div>
+  
+  <div className="table-row-group text-white xl font-normal mb-10 mt-10">
+    
+    <div className="table-row">
+      
+      <div className="table-cell text-center font-semibold border-b-4 border-background-800">Ranked</div>
+      <div className="flex flex-col border-b-4 border-background-800">
+      <div className="table-cell text-center">TochuGV</div>
+      <div className="table-cell text-center">MateCon</div>
+      </div>
+      <div className="flex flex-col border-b-4 border-background-800">
+      <div className="table-cell text-center">85%</div>
+      <div className="table-cell text-center">85%</div>
+      </div>
+      <div className="table-cell text-center border-b-4 border-background-800">46</div>
+      <div className="flex flex-col border-b-4 border-background-800">
+      <div className="table-cell text-center">1500</div>
+      <div className="table-cell text-center">1500</div>
+      </div>
+    </div>
+
+    <div className="table-row">
+      <div className="table-cell text-center font-semibold border-b-4 border-background-800">Unranked</div>
+      <div className="table-cell text-center border-b-4 border-background-800">TochuGV</div>
+      <div className="table-cell text-center border-b-4 border-background-800">85%</div>
+      <div className="table-cell text-center border-b-4 border-background-800">46</div>
+      <div className="table-cell text-center border-b-4 border-background-800">1500</div>
+    </div>
+
+    <div className="table-row">
+      <div className="table-cell text-center font-semibold border-b-4 border-background-800">Friendly</div>
+      <div className="table-cell text-center border-b-4 border-background-800">TochuGV</div>
+      <div className="table-cell text-center border-b-4 border-background-800">85%</div>
+      <div className="table-cell text-center border-b-4 border-background-800">46</div>
+      <div className="table-cell text-center border-b-4 border-background-800">1500</div>
+    </div>
+  </div>
+</div>
+
                 </div>
                 </div>  
             </div>
-            </div>
+
+
+  
+
+
             </div>
           </main>
           <Footer />

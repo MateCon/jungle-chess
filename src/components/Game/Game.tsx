@@ -153,25 +153,22 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      {showSideBar && <div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
+      {showSideBar && <><div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
         <UserDisplay
           user={users[1]}
           turn={turn}
-          time={timers.getTimeFormatted(1, 2)}
-        />
+          time={timers.getTimeFormatted(1, 2)} />
         <div className={`flex-1 bg-neutral-700 text-white w-96 my-6 overflow-hidden shadow-md overflow-y-scroll`}>
           <MoveList {...{ moveList, users }} />
         </div>
         <UserDisplay
           user={users[0]}
           turn={turn}
-          time={timers.getTimeFormatted(0, 2)}
-        />
-      </div>
-      <Modal show={showEndModal} hide={() => setShowEndModal(false)}>
-        <p>{winner} won!</p>
-      </Modal>
-    </div >
+          time={timers.getTimeFormatted(0, 2)} />
+      </div><Modal show={showEndModal} hide={() => setShowEndModal(false)}>
+          <p>{winner} won!</p>
+        </Modal></>
+    }</div>
   )
 };
 
