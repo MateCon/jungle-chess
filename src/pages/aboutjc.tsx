@@ -148,15 +148,18 @@ const Home: NextPage = () => {
 
             <div className="text-xl font-normal text-left mb-10"> 
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BR.png" width={100} height={100} alt="Rat" />
                 <span className="text-white font-semibold">Rat</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">This is the weakest piece of the game. In spite of being eaten by everyone, the rat is the only one which can eat the strongest piece, the elephant. 
                 None has this particular feature. The rat can move into the water as if it were land, but it can't be used to eat the another rat or elephant. It is mandatory for it to be on 
                 land.</span><br/>
+                </div>
             </h2>
             <h2 className="mt-4 mb-4">
               <div className="flex flex-row">
-            <Image src="/static/assets/pieces/BC.png" width={100} height={100} alt="" />
+              <Image src="/static/assets/pieces/BC.png" width={100} height={100} alt="Cat" />
                 <span className="text-white font-semibold ml-2">Cat</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">Unlike the first animal mentioned, the cat can't move into the water.</span><br/>
@@ -173,38 +176,56 @@ const Home: NextPage = () => {
 
             <div className="text-xl font-normal text-left mb-10"> 
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BD.png" width={100} height={100} alt="Dog" />
                 <span className="text-white font-semibold">Dog</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white"></span><br/>
+                </div>
             </h2>
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BW.png" width={100} height={100} alt="Wolf" />
                 <span className="text-white font-semibold">Wolf</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white"></span><br/>
+                </div>
             </h2>
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BH.png" width={100} height={100} alt="Cheetah" />
                 <span className="text-white font-semibold">Cheetah</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white"></span><br/>
+                </div>
             </h2>
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BT.png" width={100} height={100} alt="Tiger" />
                 <span className="text-white font-semibold">Tiger</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">Unlike all the pieces which were named, the tiger has the ability to jump across both lakes. Using this mechanic, not only is it useful to shorten
                 distances, but also it is capable of eating opponent's pieces while being far from them.</span><br/>
+            </div>
             </h2>
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BL.png" width={100} height={100} alt="Lion" />
                 <span className="text-white font-semibold">Lion</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">The lion, as well as the tiger, is able to jump across the water, they are practically the same. Nonetheless, this animal is stronger than the
                 tiger.</span><br/>
+                </div>
             </h2>
             <h2 className="mt-4 mb-4">
+            <div className="flex flex-row">
+            <Image src="/static/assets/pieces/BE.png" width={100} height={100} alt="Elephant" />
                 <span className="text-white font-semibold">Elephant</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">As mentioned earlier, the elephant is the strongest piece of the game which means that this animal is capable of eating all the pieces. However, 
                 it is edible for the rat which is the weakest one. Legend says that the rat gets into the elephant's ears and, once there, it completely damages its brain. This is due to the
                 size difference of both animals. It is widely known that the rat is much smaller than the elephant. Neither the elephant moves into water nor jumps over it.</span><br/>
+            </div>
             </h2>   
 
 
