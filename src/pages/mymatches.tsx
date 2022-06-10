@@ -42,6 +42,7 @@ const Home: NextPage = () => {
     <div className="table-row">
       
       <div className="table-cell text-center font-semibold border-b-4 border-background-800">Ranked</div>
+      <div className="flex flex-row">
       <div className="flex flex-col border-b-4 border-background-800">
       <div className="table-cell text-center">TochuGV</div>
       <div className="table-cell text-center">MateCon</div>
@@ -54,6 +55,7 @@ const Home: NextPage = () => {
       <div className="flex flex-col border-b-4 border-background-800">
       <div className="table-cell text-center">1500</div>
       <div className="table-cell text-center">1500</div>
+      </div>
       </div>
     </div>
 

@@ -43,6 +43,30 @@ const Home: NextPage = () => {
                 <span className="text-white font-semibold">Chess</span>
                 <span className="text-white mr-2">.</span><br/>
             </div>    
+
+
+
+
+            <h2
+              className="text-2xl font-semibold text-center mt-10 mb-10"
+              >
+                <span className="text-white">Quienes somos?</span>
+            </h2>
+            <div
+              className="text-xl font-normal text-left mb-10"
+              >
+                <span className="text-primary-600 font-semibold">Jungle</span>
+                <span className="text-white font-semibold mr-2">Chess</span> 
+                <span className="text-white">es un sitio web creado por un grupo de estudiantes de la secundaria ORT Almagro en Buenos Aires, Argentina. Hasta el día de la fecha, año 2022,
+                somos alumnos de 5to año de la orientación Informática. Como materia de este último año antes de la graduación, se nos propuso crear un proyecto el cual englobe todo lo visto
+                hasta ese momento en las distintas materias de los años anteriores incluyendo cosas nuevas si lo requería para llevarlo a cabo. Por nuestra parte, se nos ocurrió la fantastica
+                idea de crear este sitio web. ¿¿¿¿fotos nuestras con nuestros roles y linkedin????</span> 
+          
+            </div>    
+
+
+
+
             </div>
             <div className="flex flex-col justify-center items-center rounded-md shadow-sm mx-8 px-8 mt-10 mb-10 box-content bg-background-700 h-[1200px] w-[600px]">
             
@@ -120,26 +144,27 @@ const Home: NextPage = () => {
               className="mt-4 mb-4">
                 <span className="text-white font-semibold">Rat</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white">This is the weakest piece of the game. Although all others can eat it, the rat is the only one which can eat the strongest piece which is the elephant. 
-                None has this particular feature. The rat can move into the water as if it were land</span><br/>
+                <span className="text-white">This is the weakest piece of the game. In spite of being eaten by everyone, the rat is the only one which can eat the strongest piece, the elephant. 
+                None has this particular feature. The rat can move into the water as if it were land, but it can't be used to eat the another rat or elephant. It is mandatory for it to be on 
+                land.</span><br/>
             </h2>
             <h2
               className="mt-4 mb-4">
                 
                 <span className="text-white font-semibold">Cat</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white"></span><br/>
+                <span className="text-white">Unlike the first animal mentioned, the cat can't move into the water.</span><br/>
             </h2>
             <h2
               className="mt-4 mb-4">
 
-                <span className="text-white font-semibold">Wolf</span>
+                <span className="text-white font-semibold">Dog</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white"></span><br/>
             </h2>
             <h2
               className="mt-4 mb-4">
-                <span className="text-white font-semibold">Dog</span>
+                <span className="text-white font-semibold">Wolf</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white"></span><br/>
             </h2>
@@ -151,23 +176,25 @@ const Home: NextPage = () => {
             </h2>
             <h2
               className="mt-4 mb-4">
-
-                <span className="text-white font-semibold">Lion</span>
+                <span className="text-white font-semibold">Tiger</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white"></span><br/>
+                <span className="text-white">Unlike all the pieces which were named, the tiger has the ability to jump across both lakes. Using this mechanic, not only is it useful to shorten
+                distances, but also it is capable of eating opponent's pieces while being far from them.</span><br/>
             </h2>
             <h2
               className="mt-4 mb-4">
-                <span className="text-white font-semibold">Tiger</span>
+                <span className="text-white font-semibold">Lion</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white"></span><br/>
+                <span className="text-white">The lion, as well as the tiger, is able to jump across the water, they are practically the same. Nonetheless, this animal is stronger than the
+                tiger.</span><br/>
             </h2>
             <h2
               className="mt-4 mb-4">
                 <span className="text-white font-semibold">Elephant</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white">As mentioned earlier, the elephant is the strongest piece of the game. It can eat all the pieces. However, the rat, which is
-                the weakest one, can eat it. Neither the elephant moves into water nor jumps over it.</span><br/>
+                <span className="text-white">As mentioned earlier, the elephant is the strongest piece of the game which means that this animal is capable of eating all the pieces. However, 
+                it is edible for the rat which is the weakest one. Legend says that the rat gets into the elephant's ears and, once there, it completely damages its brain. This is due to the
+                size difference of both animals. It is widely known that the rat is much smaller than the elephant. Neither the elephant moves into water nor jumps over it.</span><br/>
             </h2>      
             </div>        
         
@@ -191,6 +218,12 @@ const Home: NextPage = () => {
                 <span className="text-white mr-2">Contact</span>
                 <span className="text-white">us!</span>
             </h2>
+            <div
+              className="text-xl font-normal text-left mb-10"
+              >
+                <span className="text-white">discord, mail, twitter, no se donde mas xd</span> 
+          
+            </div>   
              
             </div>
             
