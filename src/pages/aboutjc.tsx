@@ -146,6 +146,7 @@ const Home: NextPage = () => {
                 from least valuable to most ones. </span><br/>
 
 
+
             <div className="text-xl font-normal text-left mb-10"> 
             <h2 className="mt-4 mb-4">
             <div className="flex flex-row">
@@ -248,7 +249,9 @@ const Home: NextPage = () => {
             <div
               className="text-xl font-normal text-left mb-10"
               >
-                <span className="text-white">discord, mail, twitter, no se donde mas xd</span> 
+                <span className="text-white">We are open to receiving any suggestions or comments about what we have created in order to make improvements whenever we have enough availability. 
+                There are many ways to get in touch with us. Here below we left you all of them. </span><br/>
+                <span className="text-white">aca abajo se supone que va el logo de discord, el de gmail y el de twitter</span> 
           
             </div>   
              
