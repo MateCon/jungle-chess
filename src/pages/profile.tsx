@@ -17,35 +17,66 @@ const Home: NextPage = () => {
                 <div className="flex flex-col md:flex-col">                
                 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10 mb-10">
-                    <h1
+                    <h2
                     className="text-4xl font-semibold ml-4 mt-4"
                     >
                     <span className="text-white">MateCon</span>
-                    </h1>
-                    <h1
+                    </h2>
+                    <h2
                     className="text-xl font-normal ml-4 mt-4"
                     >
                     <span className="text-white">Here goes the status of the user...</span>
-                    </h1>
+                    </h2>
                     <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold text-2xl h-12 w-48 ml-4 mt-32">Add friend</button>
                 </div>
 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10">
-                    <h1
+                    <h2
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
                     <span className="text-white">Statistics</span>
-                    </h1>
+                    </h2>
+                    <div className="flex flex-row">
+                    <div className="columns-1 ml-16">
+                    <h2
+                    className="text-2xl font-normal ml-10 mt-10"
+                    >
+                    <span className="text-white font-semibold">1028</span><br/>
+                    <span className="text-white">Total Games</span>
+                    </h2>
+                    <h2
+                    className="text-2xl font-normal ml-10 mt-10"
+                    >
+                    <span className="text-white font-semibold">1634</span><br/>
+                    <span className="text-white">Highest ELO</span>
+                    </h2>
+                    </div>
+                    <div className="columns-1 ml-16">
+                    <h2
+                    className="text-2xl font-normal ml-10 mt-10"
+                    >
+                    <span className="text-white font-semibold">16 hours</span><br/>
+                    <span className="text-white">Total Playtime</span>
+                    </h2>
+                    <h2
+                    className="text-2xl font-normal ml-10 mt-10"
+                    >
+                    <span className="text-white font-semibold">7</span><br/>
+                    <span className="text-white">Best Streak</span>
+                    </h2>
+                    </div>
+                    </div>
+                    
                 </div>
 
                 </div>
 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[640px] w-[300px]">
-                    <h1
+                    <h2
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
                     <span className="text-white">Rank</span>
-                    </h1>
+                    </h2>
                 </div>
                 
                 </div>
@@ -55,11 +86,11 @@ const Home: NextPage = () => {
                 <div className="flex flex-col md:flex-col">                
                 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10 mb-10">
-                    <h1
+                    <h2
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
                     <span className="text-white">History</span>
-                    </h1>
+                    </h2>
                 </div>
 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[305px] w-[900px] mr-10">
@@ -68,11 +99,11 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[640px] w-[300px]">
-                    <h1
+                    <h2
                     className="text-2xl font-semibold ml-4 mt-4"
                     >
                     <span className="text-white">Friends</span>
-                    </h1>
+                    </h2>
                 </div>
                 
                 </div>
