@@ -21,7 +21,7 @@ const Home: NextPage = () => {
                 <span className="text-white">My Matches</span>
                 </h1>               
                 
-                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[600px] w-[1200px]">
+                <div className="flex flex-col box-content rounded-md shadow-sm bg-background-700 h-[600px] w-[1200px] mb-10">
 
   <div className="table w-full">
   
