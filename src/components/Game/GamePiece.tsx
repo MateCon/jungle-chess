@@ -61,7 +61,13 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
             onDragEnd([diffX, diffY]);
         }}
     >
-        <div className={`relative w-[${cellSize}px] h-[${cellSize}px] rounded-full overflow-hidden`}>
+        <div
+            className={`relative rounded-full overflow-hidden`}
+            style={{
+                width: cellSize,
+                height: cellSize
+            }}
+        >
             <Image
                 src={`/static/assets/pieces/${piece}.svg`}
                 alt="piece"

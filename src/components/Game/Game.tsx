@@ -153,7 +153,7 @@ const Game: FC<Props> = ({
         )}
         {createMoveListener && createMoveListener(movePiece)}
       </div>
-      {showSideBar && <><div className={`flex flex-col ml-8 h-[${cellSize * gameObjects.length}px]`}>
+      {showSideBar && <><div className={`flex flex-col ml-8`} style={{ height: cellSize * gameObjects.length }}>
         <UserDisplay
           user={users[1]}
           turn={turn}
@@ -173,4 +173,3 @@ const Game: FC<Props> = ({
 };
 
 export default Game;
-// h-[666px]
