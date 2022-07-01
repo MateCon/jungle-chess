@@ -42,7 +42,7 @@ const Home: NextPage = () => {
                 <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full text-2xl h-12 w-48 mb-8">Submit</button>
                 <h2 className="text-xl font-normal text-center mt-10 mb-10">
                   <span className="text-white mr-2">Already have an account?</span>
-                  <Link href={"/login"}>
+                  <Link href={"/api/auth/login"}>
                   <span className="text-link-100 underline text-secondary-600 hover:text-secondary-500">Log in</span>
                   </Link>
                 </h2>
