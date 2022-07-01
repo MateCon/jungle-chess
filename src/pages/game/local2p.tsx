@@ -1,11 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head';
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import Game from '../../components/Game';
 import Navbar from '../../components/Navbar'
 import * as initialState from '../../constants/startingState/default';
-
-const CELL_SIZE = 74;
 
 // createMoveHandler example
 // const createMoveHandler = (move: (move: string, position: [number, number]) => void) => {
@@ -17,17 +15,22 @@ const CELL_SIZE = 74;
 // }
 
 const Local2P: NextPage = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  let cellSize = 60;
+  if (ref.current) cellSize = (ref.current.clientHeight - 80) / 9;
+
   return (
     <>
       <Head>
         <title>Jungle Chess</title>
       </Head>
       <Navbar />
-      <div className='w-screen  bg-background-900 pt-20 md:pt-0 md:pl-20'>
+      <div ref={ref} className='w-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
         <div className='grid w-full h-screen place-items-center shadow-xl'>
           <Game
             showSideBar={true}
-            cellSize={CELL_SIZE}
+            cellSize={cellSize}
             {...initialState}
             users={[
               {
