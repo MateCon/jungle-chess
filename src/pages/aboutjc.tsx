@@ -22,7 +22,7 @@ const Home: NextPage = () => {
               <h2 className="text-2xl font-semibold text-center mt-10 mb-10">
                 <span className="text-white">Index</span>
               </h2>
-              <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full text-xl h-12 w-64">¿What's Jungle Chess?</button>
+              <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full text-xl h-12 w-64">¿What&apos;s Jungle Chess?</button>
               <div className="mt-10"></div>
               <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold rounded-full text-xl h-12 w-64">Rules</button>
               <div className="mt-10"></div>
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
             <h2
               className="text-2xl font-semibold text-center mt-10 mb-10"
               >
-                <span className="text-white mr-2">What's</span>
+                <span className="text-white mr-2">What&apos;s</span>
                 <span className="text-primary-600">Jungle</span>
                 <span className="text-white">Chess?</span>
             </h2>
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
                 <span className="text-primary-600 font-semibold">Jungle</span>
                 <span className="text-white font-semibold mr-2">Chess</span> 
                 <span className="text-white mr-2">is a website based on a board game called</span>
-                <span className="text-white font-semibold mr-2">"Dou Shou Qi"</span>
+                <span className="text-white font-semibold mr-2">&quot;Dou Shou Qi&quot;</span>
                 <span className="text-white mr-2">which was created a long time ago in China.</span>
                 <span className="text-white mr-2">This game is also known as</span>
                 <span className="text-white font-semibold">Animal Chess</span>
@@ -108,7 +108,7 @@ const Home: NextPage = () => {
                 <span className="text-white font-semibold">Lair</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">This is the most important square because it means if the game is over. There is one for each player and their location is in 
-                the middle of the first row on each side. Once a piece has entered the opponent's lair the game is over and the winner is the invader of that lair.</span><br/>
+                the middle of the first row on each side. Once a piece has entered the opponent&apos;s lair the game is over and the winner is the invader of that lair.</span><br/>
 
             </h2>
             <h2
@@ -154,7 +154,7 @@ const Home: NextPage = () => {
                 <span className="text-white font-semibold">Rat</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">This is the weakest piece of the game. In spite of being eaten by everyone, the rat is the only one which can eat the strongest piece, the elephant. 
-                None has this particular feature. The rat can move into the water as if it were land, but it can't be used to eat the another rat or elephant. It is mandatory for it to be on 
+                None has this particular feature. The rat can move into the water as if it were land, but it can&apos;t be used to eat the another rat or elephant. It is mandatory for it to be on 
                 land.</span><br/>
                 </div>
             </h2>
@@ -163,7 +163,7 @@ const Home: NextPage = () => {
               <Image src="/static/assets/pieces/BC.png" width={100} height={100} alt="Cat" />
                 <span className="text-white font-semibold ml-2">Cat</span>
                 <span className="text-white mr-2">:</span>
-                <span className="text-white">Unlike the first animal mentioned, the cat can't move into the water.</span><br/>
+                <span className="text-white">Unlike the first animal mentioned, the cat can&apos;t move into the water.</span><br/>
                 </div>
             </h2>
              
@@ -206,7 +206,7 @@ const Home: NextPage = () => {
                 <span className="text-white font-semibold">Tiger</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">Unlike all the pieces which were named, the tiger has the ability to jump across both lakes. Using this mechanic, not only is it useful to shorten
-                distances, but also it is capable of eating opponent's pieces while being far from them.</span><br/>
+                distances, but also it is capable of eating opponent&apos;s pieces while being far from them.</span><br/>
             </div>
             </h2>
             <h2 className="mt-4 mb-4">
@@ -224,7 +224,7 @@ const Home: NextPage = () => {
                 <span className="text-white font-semibold">Elephant</span>
                 <span className="text-white mr-2">:</span>
                 <span className="text-white">As mentioned earlier, the elephant is the strongest piece of the game which means that this animal is capable of eating all the pieces. However, 
-                it is edible for the rat which is the weakest one. Legend says that the rat gets into the elephant's ears and, once there, it completely damages its brain. This is due to the
+                it is edible for the rat which is the weakest one. Legend says that the rat gets into the elephant&apos;s ears and, once there, it completely damages its brain. This is due to the
                 size difference of both animals. It is widely known that the rat is much smaller than the elephant. Neither the elephant moves into water nor jumps over it.</span><br/>
             </div>
             </h2>   
@@ -233,7 +233,7 @@ const Home: NextPage = () => {
             <h2 className="text-2xl font-semibold text-center mt-10 mb-10">
                 <span className="text-white">Objective</span>
             </h2>
-                <span className="text-white">The main goal is getting into the opponent's lair, 
+                <span className="text-white">The main goal is getting into the opponent&apos;s lair, 
                 but you can also eat all the pieces of the another player.</span>
               </div>
               </div>
@@ -260,7 +260,7 @@ const Home: NextPage = () => {
             
             <div className="flex flex-col justify-center items-center rounded-md shadow-sm mx-8 px-8 mt-10 mb-10 box-content bg-background-700 h-[1200px] w-[800px]">
             <h2 className="text-2xl font-semibold text-center mt-10 mb-10">
-                <span className="text-white mr-2">What's</span>
+                <span className="text-white mr-2">What&apos;s</span>
                 <span className="text-primary-600">Jungle</span>
                 <span className="text-white">Chess?</span>
             </h2>
