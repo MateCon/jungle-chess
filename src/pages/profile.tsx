@@ -1,9 +1,17 @@
 import type { NextPage } from 'next'
-import Link from 'next/link';
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import React from 'react';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Home: NextPage = () => {
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  console.log(user)
+
     return (
       <>
         <Navbar />
@@ -20,7 +28,7 @@ const Home: NextPage = () => {
                     <h2
                     className="text-4xl font-semibold ml-4 mt-4"
                     >
-                    <span className="text-white">MateCon</span>
+                    <span className="text-white">{user?.name}</span>
                     </h2>
                     <h2
                     className="text-xl font-normal ml-4 mt-4"

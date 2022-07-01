@@ -27,7 +27,10 @@ const Home: NextPage = () => {
                 <h2 className="text-xl font-normal text-center mt-10 mb-10">
                   <span className="text-white">or connect with</span>
                 </h2>
-                <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold text-2xl h-12 w-48">Google</button>
+                
+                <a href="/api/auth/login">
+                  <button type="button" className="bg-primary-500 hover:bg-primary-400 transition text-background-900 font-bold text-2xl h-12 w-48">Google</button>
+                </a>
                 <div className="mt-10"></div>
                 <button type="button" className="bg-secondary-600 hover:bg-secondary-500 transition text-background-900 font-bold text-2xl h-12 w-48">Facebook</button>
                 <h1 className="text-xl font-normal text-center mt-10 mb-8">
