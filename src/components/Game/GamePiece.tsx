@@ -46,6 +46,7 @@ const GamePiece: FC<Props> = ({ piece, x, y, boardSize, onClick, onRelease, turn
     })
 
     return <animated.div
+        //@ts-ignore
         {...bind()}
         className={`absolute ${turn === piece[0] && 'hover:cursor-pointer'} ${isPressed ? 'hover:z-30' : 'hover:z-10'}`}
         style={{
