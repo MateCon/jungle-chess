@@ -1,3 +1,4 @@
 [0513/082013.412:ERROR:registration_protocol_win.cc(106)] CreateFile: El sistema no puede encontrar el archivo especificado. (0x2)
 [0513/082013.433:ERROR:registration_protocol_win.cc(106)] CreateFile: El sistema no puede encontrar el archivo especificado. (0x2)
 [0513/113408.132:ERROR:registration_protocol_win.cc(106)] CreateFile: El sistema no puede encontrar el archivo especificado. (0x2)
+[0801/103058.020:ERROR:registration_protocol_win.cc(106)] CreateFile: El sistema no puede encontrar el archivo especificado. (0x2)

@@ -27,7 +27,7 @@ const Local2P: NextPage = () => {
       </Head>
       <Navbar />
       <div ref={ref} className='w-screen bg-background-900 pt-20 md:pt-0 md:pl-20'>
-        <div className='grid w-full h-screen place-items-center shadow-xl'>
+        <div className='grid w-full min-h-screen place-items-center shadow-xl pt-10'>
           <Game
             showSideBar={true}
             cellSize={cellSize}
