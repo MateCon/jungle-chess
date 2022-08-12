@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Link from 'next/link';
-import { useContext, useEffect } from 'react';
+import Router from 'next/router';
+import { useContext, useEffect, useState } from 'react';
 import Footer from '../components/Footer'
 import Game from '../components/Game/Game'
 import Navbar from '../components/Navbar'
@@ -9,8 +10,10 @@ import { socketContext } from './_app';
 
 const Home: NextPage = () => {
   const socket = useContext(socketContext);
+  const [loading, setLoading] = useState<string>("");
 
   const connectUnranked = () => {
+    setLoading("10M");
     const id = Math.floor(Math.random() * 1000);
     socket.emit("join_queue", {
       id,
@@ -20,7 +23,9 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    socket.on("joined_room", (room) => console.log(room));
+    socket.on("joined_room", (room) => {
+      Router.push(`/game/${room.id}`);
+    });
   }, []);
 
   return (
@@ -48,7 +53,7 @@ const Home: NextPage = () => {
           <div className="flex flex-col justify-center items-center rounded-md shadow-sm mx-8 px-8 box-content bg-background-700 w-[400px]">
             <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Ranked</button>
             <div className="mt-16">
-              <button onClick={connectUnranked} type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Unranked</button>
+              <button onClick={connectUnranked} disabled={loading === "10M"} type="button" className={`bg-background-300 hover:bg-background-500 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48 disabled:bg-background-500`}>Unranked</button>
               <div className="mt-16">
                 <button type="button" className="bg-background-300 hover:bg-background-100 transition text-background-900 font-bold rounded-sm mr-4 text-2xl h-16 w-48">Friends</button>
                 <div className="mt-16">
