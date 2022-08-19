@@ -2,7 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import type { NextPage } from 'next'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import Game from '../../components/Game';
 import Navbar from '../../components/Navbar'
 import * as initialState from '../../constants/startingState/default';
@@ -11,8 +11,12 @@ import { socketContext } from '../_app';
 // createMoveHandler example
 const moveListener = (move: (move: string, position: [number, number]) => void) => {
   const socket = useContext(socketContext);
+  const [lastMove, setLastMove] = useState<any>([])
+
   useEffect(() => {
     socket.on("move", (moveData: [string, [number, number]]) => {
+      if (lastMove.length > 0 && moveData[0] === lastMove[0] && moveData[1][0] === lastMove[1][0] && moveData[1][1] === lastMove[1][1])
+      setLastMove(moveData);
       move(...moveData);
     });
   }, []);
@@ -55,6 +59,7 @@ const Online: NextPage = () => {
               }
             ]}
             onMove={(move, moveData) => {
+                console.log("NOOOOOOOOOOOOOO");
                 socket.emit("move", { id: user?.email, name: user?.name }, roomId, [move, moveData]);
             }}
             createMoveListener={moveListener}
