@@ -11,14 +11,18 @@ import { socketContext } from '../_app';
 // createMoveHandler example
 const moveListener = (move: (move: string, position: [number, number]) => void) => {
   const socket = useContext(socketContext);
-  const [lastMove, setLastMove] = useState<any>([])
 
   useEffect(() => {
     socket.on("move", (moveData: [string, [number, number]]) => {
-      if (lastMove.length > 0 && moveData[0] === lastMove[0] && moveData[1][0] === lastMove[1][0] && moveData[1][1] === lastMove[1][1])
-      setLastMove(moveData);
-      move(...moveData);
+    //   if (lastMove.length > 0 && moveData[0] === lastMove[0] && moveData[1][0] === lastMove[1][0] && moveData[1][1] === lastMove[1][1])
+    //   setLastMove(moveData);
+        console.log("ONCE")
+        move(...moveData);
     });
+
+    return () => {
+        socket.off("move");
+    }
   }, []);
 
   return <></>
