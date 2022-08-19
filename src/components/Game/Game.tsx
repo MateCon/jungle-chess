@@ -52,7 +52,16 @@ const Game: FC<Props> = ({
     timers.resumeAndStopOthers(t === "B" ? 1 : 0);
   }, [timers]);
 
-  const movePiece = (move: string, position: [number, number]): boolean => {
+  const movePieceWithListener = (...params: [string, [number, number]]) => {
+    return movePiece(...params, true);
+  }
+
+  const movePieceWithoutListener = (...params: [string, [number, number]]) => {
+    const result = movePiece(...params, false);
+    return result;
+  }
+
+  const movePiece = (move: string, position: [number, number], hasListener: boolean): boolean => {
     if (state[position[1]][position[0]][0] !== turn) return false;
     const data = movePieceMethod(gameObjects, state, pieces, turn, move, position, endSquares[turn]);
     if (!data) return false;
@@ -93,7 +102,7 @@ const Game: FC<Props> = ({
     } else {
       setMoveList([...moveList, [move]]);
     }
-    if (onMove) onMove(move, position);
+    if (onMove && hasListener) onMove(move, position);
     return true;
   }
 
@@ -122,7 +131,7 @@ const Game: FC<Props> = ({
                 const diff: [number, number] = [-(selectedPiece![0] - x), -(selectedPiece![1] - y)];
                 const direction = diffToDirection(diff);
                 if (!direction) return false;
-                return movePiece(`${name}${direction}`, selectedPiece!);
+                return movePieceWithListener(`${name}${direction}`, selectedPiece!);
               }}
             />
             }
@@ -147,11 +156,11 @@ const Game: FC<Props> = ({
               if (!direction) return false;
               if (active.length === 3) setActive(active.slice(0, 1));
               else setActive([]);
-              return movePiece(`${name}${direction}`, [x, y]);
+              return movePieceWithListener(`${name}${direction}`, [x, y]);
             }}
           />
         )}
-        {createMoveListener && createMoveListener(movePiece)}
+        {createMoveListener && createMoveListener(movePieceWithoutListener)}
       </div>
       {showSideBar && <><div className={`flex flex-col ml-8`} style={{ height: cellSize * gameObjects.length }}>
         <UserDisplay

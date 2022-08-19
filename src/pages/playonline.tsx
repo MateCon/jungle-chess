@@ -1,3 +1,4 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import type { NextPage } from 'next'
 import Link from 'next/link';
 import Router from 'next/router';
@@ -11,13 +12,13 @@ import { socketContext } from './_app';
 const Home: NextPage = () => {
   const socket = useContext(socketContext);
   const [loading, setLoading] = useState<string>("");
+  const { user } = useUser();
 
   const connectUnranked = () => {
     setLoading("10M");
-    const id = Math.floor(Math.random() * 1000);
     socket.emit("join_queue", {
-      id,
-      name: `guest${id}`,
+      id: user.email,
+      name: user.name,
       elo: 1200
     }, "10M");
   }
